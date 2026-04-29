@@ -153,16 +153,6 @@ VOID main (VOID)
 // Set all ports to Output: Low for power savings, then configure peripherals.
 void initPorts(void)
 {
-#ifdef __MSP430_HAS_PORT1_R__
-    GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_ALL);
-    GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_ALL);
-#endif
-
-#ifdef __MSP430_HAS_PORT2_R__
-    GPIO_setOutputLowOnPin(GPIO_PORT_P2, GPIO_ALL);
-    GPIO_setAsOutputPin(GPIO_PORT_P2, GPIO_ALL);
-#endif
-
 #ifdef __MSP430_HAS_PORT3_R__
     GPIO_setOutputLowOnPin(GPIO_PORT_P3, GPIO_ALL);
     GPIO_setAsOutputPin(GPIO_PORT_P3, GPIO_ALL);
@@ -181,11 +171,6 @@ void initPorts(void)
 #ifdef __MSP430_HAS_PORT6_R__
     GPIO_setOutputLowOnPin(GPIO_PORT_P6, GPIO_ALL);
     GPIO_setAsOutputPin(GPIO_PORT_P6, GPIO_ALL);
-#endif
-
-#ifdef __MSP430_HAS_PORT7_R__
-    GPIO_setOutputLowOnPin(GPIO_PORT_P7, GPIO_ALL);
-    GPIO_setAsOutputPin(GPIO_PORT_P7, GPIO_ALL);
 #endif
 
 #ifdef __MSP430_HAS_PORT8_R__
@@ -208,83 +193,6 @@ void initPorts(void)
     OBDLED_DIR |= OBDLED_PIN;
     OBDLED_SEL |= OBDLED_PIN;
     OBDLED_CCR = 0;
-
-    STS1RED_OUT &= ~STS1RED_PIN;
-    STS1RED_DIR |= STS1RED_PIN;
-    STS1RED_SEL |= STS1RED_PIN;
-    STS1RED_CCR = 0;
-
-    STS1GRN_OUT &= ~STS1GRN_PIN;
-    STS1GRN_DIR |= STS1GRN_PIN;
-    STS1GRN_SEL |= STS1GRN_PIN;
-    STS1GRN_CCR = 0;
-
-    STS1BLU_OUT &= ~STS1BLU_PIN;
-    STS1BLU_DIR |= STS1BLU_PIN;
-    STS1BLU_SEL |= STS1BLU_PIN;
-    STS1BLU_CCR = 0;
-
-    STS2RED_OUT &= ~STS2RED_PIN;
-    STS2RED_DIR |= STS2RED_PIN;
-    STS2RED_SEL |= STS2RED_PIN;
-    STS2RED_CCR = 0;
-
-    STS2GRN_OUT &= ~STS2GRN_PIN;
-    STS2GRN_DIR |= STS2GRN_PIN;
-    STS2GRN_SEL |= STS2GRN_PIN;
-    STS2GRN_CCR = 0;
-
-    STS2BLU_OUT &= ~STS2BLU_PIN;
-    STS2BLU_DIR |= STS2BLU_PIN;
-    STS2BLU_SEL |= STS2BLU_PIN;
-    STS2BLU_CCR = 0;
-
-    STS3RED_OUT &= ~STS3RED_PIN;
-    STS3RED_DIR |= STS3RED_PIN;
-    STS3RED_SEL |= STS3RED_PIN;
-    STS3RED_CCR = 0;
-
-    STS3GRN_OUT &= ~STS3GRN_PIN;
-    STS3GRN_DIR |= STS3GRN_PIN;
-    STS3GRN_SEL |= STS3GRN_PIN;
-    STS3GRN_CCR = 0;
-
-    STS3BLU_OUT &= ~STS3BLU_PIN;
-    STS3BLU_DIR |= STS3BLU_PIN;
-    STS3BLU_SEL |= STS3BLU_PIN;
-    STS3BLU_CCR = 0;
-
-    // Configure TimerA0
-    TA0CCR0 = PWM_MAX_COUNT;							// Top val for PWM
-    TA0CCTL1 = OUTMOD_7;								// PWM Reset-Set mode
-    TA0CCTL2 = OUTMOD_7;								// PWM Reset-Set mode
-	TA0CCTL3 = OUTMOD_7;								// PWM Reset-Set mode
-	TA0CCTL4 = OUTMOD_7;								// PWM Reset-Set mode
-    TA0CTL = TASSEL_2 + MC_1;							// PWM clock src=ACLK, count up
-
-    // Configure TimerA1
-    TA1CCR0 = PWM_MAX_COUNT;							// Top val for PWM
-    TA1CCTL1 = OUTMOD_7;								// PWM Reset-Set mode
-    TA1CCTL2 = OUTMOD_7;								// PWM Reset-Set mode
-    TA1CTL = TASSEL_2 + MC_1;							// PWM clock src=ACLK, count up
-
-    // Configure TimerA2
-    TA2CCR0 = PWM_MAX_COUNT;							// Top val for PWM
-    TA2CCTL1 = OUTMOD_7;								// PWM Reset-Set mode
-    TA2CCTL2 = OUTMOD_7;								// PWM Reset-Set mode
-    TA2CCR1 = 0;
-    TA2CCR2 = 0;
-    TA2CTL = TASSEL_2 + MC_1;							// PWM clock src=ACLK, count up
-
-    // Configure TimerB0
-    TB0CCR0 = PWM_MAX_COUNT;							// Top val for PWM
-    TB0CCTL1 = OUTMOD_7;								// PWM Reset-Set mode
-    TB0CCTL2 = OUTMOD_7;								// PWM Reset-Set mode
-	TB0CCTL3 = OUTMOD_7;								// PWM Reset-Set mode
-	TB0CCTL4 = OUTMOD_7;								// PWM Reset-Set mode
-	TB0CCTL5 = OUTMOD_7;								// PWM Reset-Set mode
-	TB0CCTL6 = OUTMOD_7;								// PWM Reset-Set mode
-    TB0CTL = TBSSEL_2 + MC_1;							// PWM clock src=ACLK, count up
 }
 
 // Set up clocks.  MCLK=SMCLK=DCO/FLL=mclkFreq; ACLK=FLLref=REFO=32kHz

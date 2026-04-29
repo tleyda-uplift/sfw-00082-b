@@ -1,12 +1,16 @@
 #include <msp430.h>
 #include <stdbool.h>
 
+#include "gpio.h"
 #include "USB_API/USB_Common/types.h"
 
 #include "P8_LED_CONFIG.h"
 #include "outputs.h"
 
 #define PWM_MAX_COUNT 255
+
+#define GPIO_ALL	GPIO_PIN0|GPIO_PIN1|GPIO_PIN2|GPIO_PIN3| \
+					GPIO_PIN4|GPIO_PIN5|GPIO_PIN6|GPIO_PIN7
 
 typedef struct {
     volatile unsigned int *captureRegister;
@@ -23,6 +27,77 @@ typedef enum {
 static volatile unsigned int* outputCaptureRegisters[9];
 
 void initializeOutputs() {
+#ifdef __MSP430_HAS_PORT1_R__
+    GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_ALL);
+    GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_ALL);
+#endif
+
+#ifdef __MSP430_HAS_PORT2_R__
+    GPIO_setOutputLowOnPin(GPIO_PORT_P2, GPIO_ALL);
+    GPIO_setAsOutputPin(GPIO_PORT_P2, GPIO_ALL);
+#endif
+
+#ifdef __MSP430_HAS_PORT7_R__
+    GPIO_setOutputLowOnPin(GPIO_PORT_P7, GPIO_ALL);
+    GPIO_setAsOutputPin(GPIO_PORT_P7, GPIO_ALL);
+#endif
+
+    // Port 1
+    P1OUT = 0;
+    P1DIR = BIT7|BIT6|BIT5|BIT4|BIT3|BIT2|BIT1|BIT0;
+    P1SEL = 0;
+    P1SEL |= BIT5|BIT4|BIT3|BIT2;
+
+    // Port 2
+    P2OUT = 0;
+    P2DIR = BIT7|BIT6|BIT5|BIT4|BIT3|BIT2|BIT1|BIT0;
+    P2SEL = 0;
+    P2SEL |= BIT5|BIT4|BIT1|BIT0;
+
+    // Port 7
+    P7OUT = 0;
+    P7DIR = BIT7|BIT6|BIT5|BIT4|BIT3|BIT2|BIT1|BIT0;
+    P7SEL = 0;
+    P7SEL |= BIT6|BIT5|BIT4;
+    
+    // Configure TimerA0
+    TA0CCR0 = PWM_MAX_COUNT;							// Top val for PWM
+    TA0CCTL1 = OUTMOD_7;								// PWM Reset-Set mode
+    TA0CCTL2 = OUTMOD_7;								// PWM Reset-Set mode
+	TA0CCTL3 = OUTMOD_7;								// PWM Reset-Set mode
+	TA0CCTL4 = OUTMOD_7;								// PWM Reset-Set mode
+    TA0CCR1 = 0;
+    TA0CCR2 = 0;
+    TA0CCR3 = 0;
+    TA0CCR4 = 0;
+    TA0CTL = TASSEL_2 + MC_1;							// PWM clock src=ACLK, count up
+
+    // Configure TimerA1
+    TA1CCR0 = PWM_MAX_COUNT;							// Top val for PWM
+    TA1CCTL1 = OUTMOD_7;								// PWM Reset-Set mode
+    TA1CCTL2 = OUTMOD_7;								// PWM Reset-Set mode
+    TA1CCR1 = 0;
+    TA1CCR2 = 0;
+    TA1CTL = TASSEL_2 + MC_1;							// PWM clock src=ACLK, count up
+
+    // Configure TimerA2
+    TA2CCR0 = PWM_MAX_COUNT;							// Top val for PWM
+    TA2CCTL1 = OUTMOD_7;								// PWM Reset-Set mode
+    TA2CCTL2 = OUTMOD_7;								// PWM Reset-Set mode
+    TA2CCR1 = 0;
+    TA2CCR2 = 0;
+    TA2CTL = TASSEL_2 + MC_1;							// PWM clock src=ACLK, count up
+
+    // Configure TimerB0
+    TB0CCR0 = PWM_MAX_COUNT;							// Top val for PWM
+    TB0CCTL2 = OUTMOD_7;								// PWM Reset-Set mode
+	TB0CCTL3 = OUTMOD_7;								// PWM Reset-Set mode
+	TB0CCTL4 = OUTMOD_7;								// PWM Reset-Set mode
+    TB0CCR2 = 0;
+    TB0CCR3 = 0;
+    TB0CCR4 = 0;
+    TB0CTL = TBSSEL_2 + MC_1;							// PWM clock src=ACLK, count up
+
     outputCaptureRegisters[0] = &TA0CCR1;
     outputCaptureRegisters[1] = &TA0CCR2;
     outputCaptureRegisters[2] = &TA0CCR3;
