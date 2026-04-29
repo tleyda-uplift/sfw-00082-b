@@ -1,7 +1,7 @@
 ﻿using HID_Test_App.Commands;
 using HID_Test_App.Models;
 using HID_Test_App.Views;
-using HidLibrary;
+using HidSharp;
 
 namespace HID_Test_App.Presenters
 {
@@ -64,6 +64,19 @@ namespace HID_Test_App.Presenters
                 .WithOutput(6, mainForm.ChangeEnabled6, GetOutputState(mainForm.OutputOn6, mainForm.OutputPwm6), (int)mainForm.OutputDutyCycle6)
                 .WithOutput(7, mainForm.ChangeEnabled7, GetOutputState(mainForm.OutputOn7, mainForm.OutputPwm7), (int)mainForm.OutputDutyCycle7)
                 .BuildCommandData();
+            if (hidDevice != null && hidDevice.TryOpen(out DeviceStream stream))
+            {
+                using (stream)
+                {
+                    stream.ReadTimeout = 1000;
+                    byte[] outputReport = new byte[hidDevice.GetMaxOutputReportLength()];
+
+                    usbData.CopyTo(outputReport, 1);
+                    outputReport[0] = 0x3F;
+                    stream.Write(outputReport);
+                }
+
+            }
 
             string[] commandDisplay = [.. usbData.Select(x => Convert.ToHexString([x]))];
             mainForm.CommandData = string.Join(',', commandDisplay);
@@ -71,7 +84,6 @@ namespace HID_Test_App.Presenters
 
         private void MainForm_DisconnectClicked(object? sender, EventArgs e)
         {
-            hidDevice?.CloseDevice();
             hidDevice = null;
             mainForm.ConnectEnabled = true;
             mainForm.DisconnectEnabled = false;
@@ -83,13 +95,13 @@ namespace HID_Test_App.Presenters
 
             var vendorId = Convert.ToInt32(mainForm.VendorId, 16);
             var productId = Convert.ToInt32(mainForm.ProductId, 16);
-            hidDevice = HidDevices.Enumerate(vendorId, productId).FirstOrDefault();
+
+            var list = DeviceList.Local;
+
+            hidDevice = list.GetHidDevices(vendorId, productId).FirstOrDefault();
 
             if (hidDevice != null) 
             {
-                hidDevice.OpenDevice();
-                hidDevice.ReadManufacturer(out byte[] data);
-                Console.WriteLine(data);
                 mainForm.ConnectEnabled = false;
                 mainForm.DisconnectEnabled = true;
             }
