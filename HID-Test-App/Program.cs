@@ -1,5 +1,6 @@
 using HID_Test_App.Presenters;
 using HID_Test_App.Views;
+using HID_Test_App.Services;
 
 namespace HID_Test_App
 {
@@ -15,8 +16,9 @@ namespace HID_Test_App
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            var mainForm = new MainForm();
-            mainForm.Tag = new MainPresenter(mainForm);
+            var hidService = new HidService();
+
+            var mainForm = new MainForm(hidService);
 
             Application.Run(mainForm);
         }
