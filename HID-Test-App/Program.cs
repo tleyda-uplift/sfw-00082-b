@@ -1,6 +1,5 @@
 using HID_Test_App.Presenters;
 using HID_Test_App.Views;
-using HidLibrary;
 
 namespace HID_Test_App
 {

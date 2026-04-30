@@ -55,6 +55,7 @@ namespace HID_Test_App.Presenters
         private void MainForm_SendClicked(object? sender, EventArgs e)
         {
             byte[] usbData = outputCommandBuilder
+                .WithPort(this.mainForm.OutputPort)
                 .WithOutput(0, mainForm.ChangeEnabled0, GetOutputState(mainForm.OutputOn0, mainForm.OutputPwm0), (int)mainForm.OutputDutyCycle0)
                 .WithOutput(1, mainForm.ChangeEnabled1, GetOutputState(mainForm.OutputOn1, mainForm.OutputPwm1), (int)mainForm.OutputDutyCycle1)
                 .WithOutput(2, mainForm.ChangeEnabled2, GetOutputState(mainForm.OutputOn2, mainForm.OutputPwm2), (int)mainForm.OutputDutyCycle2)
