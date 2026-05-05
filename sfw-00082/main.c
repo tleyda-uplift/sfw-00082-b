@@ -65,6 +65,7 @@
 #include "USB_API/USB_HID_API/UsbHid.h"
 #include "USB_app/usbConstructs.h"
 
+#include "inputs.h"
 #include "outputs.h"
 #include "P8_LED_CONFIG.h"
 #include "main.h"
@@ -84,6 +85,16 @@ volatile BYTE bHIDDataReceived_event = FALSE; // Indicates data has been rx'ed
 
 #define MAX_STR_LENGTH 32
 char wholeString[MAX_STR_LENGTH] = "";
+BYTE reportBuffer[MAX_STR_LENGTH];
+
+void resetReportBuffer() {
+    uint8_t idx;
+
+    for (idx = 0; idx < MAX_STR_LENGTH; ++idx) {
+        reportBuffer[idx] = 0;
+    }
+}
+
 
 /*  
  * ======== main ========
@@ -100,8 +111,13 @@ VOID main (VOID)
     USB_setup(TRUE, TRUE); // Init USB & events; if a host is present, connect
 
 	initializeOutputs();
+    initializeInputs();
+
+    resetReportBuffer();
 
     __enable_interrupt();  // Enable interrupts globally
+
+    OBDLED_OUT |= OBDLED_PIN;
     
     while (1)
     {
@@ -126,6 +142,10 @@ VOID main (VOID)
                     if(wholeString[0] == 0x37) // A correct Byte 0 indicates this data is good
                     {
 						setOutputs((BYTE*)wholeString);
+                        resetReportBuffer();
+                        getInputsReport(reportBuffer);
+                    } else if (wholeString[0] == 0x38) {
+                        configureInputs((BYTE*)wholeString);
                     }
                     
                     // Reset buffers and flags
@@ -153,24 +173,9 @@ VOID main (VOID)
 // Set all ports to Output: Low for power savings, then configure peripherals.
 void initPorts(void)
 {
-#ifdef __MSP430_HAS_PORT3_R__
-    GPIO_setOutputLowOnPin(GPIO_PORT_P3, GPIO_ALL);
-    GPIO_setAsOutputPin(GPIO_PORT_P3, GPIO_ALL);
-#endif
-
-#ifdef __MSP430_HAS_PORT4_R__
-    GPIO_setOutputLowOnPin(GPIO_PORT_P4, GPIO_ALL);
-    GPIO_setAsOutputPin(GPIO_PORT_P4, GPIO_ALL);
-#endif
-
 #ifdef __MSP430_HAS_PORT5_R__
     GPIO_setOutputLowOnPin(GPIO_PORT_P5, GPIO_ALL);
     GPIO_setAsOutputPin(GPIO_PORT_P5, GPIO_ALL);
-#endif
-
-#ifdef __MSP430_HAS_PORT6_R__
-    GPIO_setOutputLowOnPin(GPIO_PORT_P6, GPIO_ALL);
-    GPIO_setAsOutputPin(GPIO_PORT_P6, GPIO_ALL);
 #endif
 
 #ifdef __MSP430_HAS_PORT8_R__
@@ -191,8 +196,7 @@ void initPorts(void)
     // CONFIGURE PWM OUTPUT CHANNELS
     OBDLED_OUT &= ~OBDLED_PIN;
     OBDLED_DIR |= OBDLED_PIN;
-    OBDLED_SEL |= OBDLED_PIN;
-    OBDLED_CCR = 0;
+    OBDLED_SEL &= ~OBDLED_PIN;
 }
 
 // Set up clocks.  MCLK=SMCLK=DCO/FLL=mclkFreq; ACLK=FLLref=REFO=32kHz
@@ -240,5 +244,3 @@ __interrupt VOID UNMI_ISR (VOID)
             USB_disable(); //Disable
     }
 }
-
-
