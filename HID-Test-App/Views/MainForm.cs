@@ -24,6 +24,7 @@ namespace HID_Test_App.Views
             _presenter = new MainPresenter(this, hidService);
 
             outputCommandView.Initialize(hidService);
+            inputConfiigView.Initialize(hidService);
         }
 
         public event EventHandler? ConnectClicked;

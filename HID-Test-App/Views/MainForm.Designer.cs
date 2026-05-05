@@ -38,8 +38,11 @@
             tabPageStatus = new TabPage();
             tabPageCommand = new TabPage();
             outputCommandView = new OutputCommandView();
+            tabPageInputConfig = new TabPage();
+            inputConfiigView = new InputConfiigView();
             tabsStatusCommand.SuspendLayout();
             tabPageCommand.SuspendLayout();
+            tabPageInputConfig.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -98,6 +101,7 @@
             // 
             tabsStatusCommand.Controls.Add(tabPageStatus);
             tabsStatusCommand.Controls.Add(tabPageCommand);
+            tabsStatusCommand.Controls.Add(tabPageInputConfig);
             tabsStatusCommand.Location = new Point(10, 50);
             tabsStatusCommand.Name = "tabsStatusCommand";
             tabsStatusCommand.SelectedIndex = 0;
@@ -132,6 +136,24 @@
             outputCommandView.Size = new Size(560, 540);
             outputCommandView.TabIndex = 0;
             // 
+            // tabPageInputConfig
+            // 
+            tabPageInputConfig.Controls.Add(inputConfiigView);
+            tabPageInputConfig.Location = new Point(4, 24);
+            tabPageInputConfig.Name = "tabPageInputConfig";
+            tabPageInputConfig.Padding = new Padding(3);
+            tabPageInputConfig.Size = new Size(573, 545);
+            tabPageInputConfig.TabIndex = 2;
+            tabPageInputConfig.Text = "Input Config";
+            tabPageInputConfig.UseVisualStyleBackColor = true;
+            // 
+            // inputConfiigView
+            // 
+            inputConfiigView.Location = new Point(9, 7);
+            inputConfiigView.Name = "inputConfiigView";
+            inputConfiigView.Size = new Size(455, 532);
+            inputConfiigView.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -149,6 +171,7 @@
             Text = "HID Test App";
             tabsStatusCommand.ResumeLayout(false);
             tabPageCommand.ResumeLayout(false);
+            tabPageInputConfig.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -165,5 +188,7 @@
         private TabPage tabPageStatus;
         public TabPage tabPageCommand;
         private OutputCommandView outputCommandView;
+        private TabPage tabPageInputConfig;
+        private InputConfiigView inputConfiigView;
     }
 }

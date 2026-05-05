@@ -1,12 +1,6 @@
 ﻿using HID_Test_App.Presenters;
 using HID_Test_App.Services;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
 
 namespace HID_Test_App.Views
 {
