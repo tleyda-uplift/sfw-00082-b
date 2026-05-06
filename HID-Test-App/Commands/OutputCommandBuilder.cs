@@ -14,7 +14,7 @@ namespace HID_Test_App.Commands
         public OutputCommandBuilder()
         {
             port = 0;
-            outputParams = [.. Enumerable.Range(0, 8).Select(_ => new OutputParams())];
+            outputParams = [.. Enumerable.Range(0, 9).Select(_ => new OutputParams())];
         }
 
         public OutputCommandBuilder WithPort(int port) { this.port = port; return this;}
@@ -58,6 +58,9 @@ namespace HID_Test_App.Commands
             data[25] |= (byte)(outputParams[7].ChangeEnabled ? 0x80 : 0);
             data[25] |= GetControlFunctionBitMask(outputParams[7].State);
             data[26] = (byte)(outputParams[7].DutyCycle);
+            data[27] |= (byte)(outputParams[8].ChangeEnabled ? 0x80 : 0);
+            data[27] |= GetControlFunctionBitMask(outputParams[8].State);
+            data[28] = (byte)(outputParams[8].DutyCycle);
 
             return data;
         }

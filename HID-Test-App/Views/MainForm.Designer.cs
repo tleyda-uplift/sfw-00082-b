@@ -41,10 +41,13 @@
             outputCommandView = new OutputCommandView();
             tabPageInputConfig = new TabPage();
             inputConfiigView = new InputConfiigView();
+            tabPageLedTest = new TabPage();
+            ledTestView = new LedTestView();
             tabsStatusCommand.SuspendLayout();
             tabPageStatus.SuspendLayout();
             tabPageCommand.SuspendLayout();
             tabPageInputConfig.SuspendLayout();
+            tabPageLedTest.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -107,9 +110,10 @@
             // 
             // tabsStatusCommand
             // 
-            tabsStatusCommand.Controls.Add(tabPageStatus);
+            tabsStatusCommand.Controls.Add(tabPageLedTest);
             tabsStatusCommand.Controls.Add(tabPageCommand);
             tabsStatusCommand.Controls.Add(tabPageInputConfig);
+            tabsStatusCommand.Controls.Add(tabPageStatus);
             tabsStatusCommand.Location = new Point(14, 83);
             tabsStatusCommand.Margin = new Padding(4, 5, 4, 5);
             tabsStatusCommand.Name = "tabsStatusCommand";
@@ -176,6 +180,24 @@
             inputConfiigView.Size = new Size(650, 887);
             inputConfiigView.TabIndex = 0;
             // 
+            // tabPageLedTest
+            // 
+            tabPageLedTest.Controls.Add(ledTestView);
+            tabPageLedTest.Location = new Point(4, 34);
+            tabPageLedTest.Name = "tabPageLedTest";
+            tabPageLedTest.Padding = new Padding(3);
+            tabPageLedTest.Size = new Size(822, 917);
+            tabPageLedTest.TabIndex = 3;
+            tabPageLedTest.Text = "LED Test";
+            tabPageLedTest.UseVisualStyleBackColor = true;
+            // 
+            // ledTestView
+            // 
+            ledTestView.Location = new Point(16, 12);
+            ledTestView.Name = "ledTestView";
+            ledTestView.Size = new Size(800, 899);
+            ledTestView.TabIndex = 0;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -196,6 +218,7 @@
             tabPageStatus.ResumeLayout(false);
             tabPageCommand.ResumeLayout(false);
             tabPageInputConfig.ResumeLayout(false);
+            tabPageLedTest.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -215,5 +238,7 @@
         private TabPage tabPageInputConfig;
         private InputConfiigView inputConfiigView;
         private StatusView statusView;
+        private TabPage tabPageLedTest;
+        private LedTestView ledTestView;
     }
 }
