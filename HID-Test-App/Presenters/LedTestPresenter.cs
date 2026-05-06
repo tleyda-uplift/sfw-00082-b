@@ -13,30 +13,38 @@ namespace HID_Test_App.Presenters
         private int _testCount;
         private readonly string[] TestDisplay = 
             [
-                "Red 1",
-                "Green 1",
-                "Blue 1",
-                "Red 2",
-                "Green 2",
-                "Blue 2",
-                "Red 3",
-                "Green 3",
-                "Blue 3",
-                "N/A"
+                "LED 1 - Red",
+                "LED 1 - Green",
+                "LED 1 - Blue",
+                "LED 2 - Red",
+                "LED 2 - Green",
+                "LED 2 - Blue",
+                "LED 3 - Red",
+                "LED 3 - Green",
+                "LED 3 - Blue",
+                "Test Complete"
+            ];
+        private readonly string[] LedColors =
+            [
+                "Red",
+                "Lime",
+                "CornflowerBlue"
             ];
 
         public LedTestPresenter(ILedTestView ledTestView, IHidService hidService)
         {
             _ledTestView = ledTestView;
             _hidService = hidService;
+            _testCount = 10;
 
             _ledTestView.StartClicked += LedTestView_StartClicked;
             _ledTestView.StartEnabled = false;
+            _ledTestView.StatusText = "N/A";
+            SetLedColors();
 
             _testTimer = new System.Windows.Forms.Timer();
             _testTimer.Interval = 2000;
             _testTimer.Tick += TimerHandler;
-            _testCount = 0;
 
             _hidService.ConnectionChanged += HidService_ConnectionChanged;
         }
@@ -50,15 +58,16 @@ namespace HID_Test_App.Presenters
         {
             _ledTestView.StartEnabled = false;
             _testCount = 0;
-            _ledTestView.LabelTemp = TestDisplay[_testCount];
+            _ledTestView.StatusText = TestDisplay[_testCount];
+            SetLedColors();
             SendCurrentCommand();
             _testTimer.Start();
         }
 
         private void TimerHandler(object? sender, EventArgs e)
         {
-            _ledTestView.LabelTemp = TestDisplay[_testCount];
-
+            _ledTestView.StatusText = TestDisplay[_testCount];
+            SetLedColors();
             SendCurrentCommand();
 
             if (_testCount > 9) 
@@ -66,6 +75,35 @@ namespace HID_Test_App.Presenters
                 _testTimer.Stop();
                 _ledTestView.StartEnabled = true;
             }
+        }
+
+        private void SetLedColors()
+        {
+            if (_testCount < 3)
+            {
+                _ledTestView.LedColor1 = LedColors[_testCount % 3];
+                _ledTestView.LedColor2 = "Gray";
+                _ledTestView.LedColor3 = "Gray";
+            }
+            else if (_testCount < 6)
+            {
+                _ledTestView.LedColor1 = "Gray";
+                _ledTestView.LedColor2 = LedColors[_testCount % 3];
+                _ledTestView.LedColor3 = "Gray";
+            }
+            else if (_testCount < 9)
+            {
+                _ledTestView.LedColor1 = "Gray";
+                _ledTestView.LedColor2 = "Gray";
+                _ledTestView.LedColor3 = LedColors[_testCount % 3];
+            }
+            else
+            {
+                _ledTestView.LedColor1 = "Gray";
+                _ledTestView.LedColor2 = "Gray";
+                _ledTestView.LedColor3 = "Gray";
+            }
+
         }
 
         private void SendCurrentCommand()

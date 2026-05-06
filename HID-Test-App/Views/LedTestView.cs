@@ -8,10 +8,17 @@ namespace HID_Test_App.Views
     {
         private LedTestPresenter? presenter;
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string LabelTemp { get => labelTemp.Text; set => labelTemp.Text = value; }
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool StartEnabled { get => btnLedTestStart.Enabled; set => btnLedTestStart.Enabled = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string LedColor1 { get => panelLedDisplay1.BackColor.ToString(); set => panelLedDisplay1.BackColor = Color.FromName(value); }
+         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string LedColor2 { get => panelLedDisplay2.BackColor.ToString(); set => panelLedDisplay2.BackColor = Color.FromName(value); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string LedColor3 { get => panelLedDisplay3.BackColor.ToString(); set => panelLedDisplay3.BackColor = Color.FromName(value); }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string StatusText { get => labelStatus.Text; set => labelStatus.Text = value; }
 
         public LedTestView()
         {
