@@ -35,19 +35,19 @@
             btnConnect = new Button();
             btnDisconnect = new Button();
             tabsStatusCommand = new TabControl();
-            tabPageStatus = new TabPage();
-            statusView = new StatusView();
+            tabPageLedTest = new TabPage();
+            ledTestView = new LedTestView();
             tabPageCommand = new TabPage();
             outputCommandView = new OutputCommandView();
             tabPageInputConfig = new TabPage();
             inputConfiigView = new InputConfiigView();
-            tabPageLedTest = new TabPage();
-            ledTestView = new LedTestView();
+            tabPageStatus = new TabPage();
+            statusView = new StatusView();
             tabsStatusCommand.SuspendLayout();
-            tabPageStatus.SuspendLayout();
+            tabPageLedTest.SuspendLayout();
             tabPageCommand.SuspendLayout();
             tabPageInputConfig.SuspendLayout();
-            tabPageLedTest.SuspendLayout();
+            tabPageStatus.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -117,37 +117,37 @@
             tabsStatusCommand.Location = new Point(14, 83);
             tabsStatusCommand.Margin = new Padding(4, 5, 4, 5);
             tabsStatusCommand.Name = "tabsStatusCommand";
+            tabsStatusCommand.Padding = new Point(16, 16);
             tabsStatusCommand.SelectedIndex = 0;
             tabsStatusCommand.Size = new Size(830, 955);
             tabsStatusCommand.TabIndex = 6;
             // 
-            // tabPageStatus
+            // tabPageLedTest
             // 
-            tabPageStatus.Controls.Add(statusView);
-            tabPageStatus.Location = new Point(4, 34);
-            tabPageStatus.Margin = new Padding(4, 5, 4, 5);
-            tabPageStatus.Name = "tabPageStatus";
-            tabPageStatus.Padding = new Padding(4, 5, 4, 5);
-            tabPageStatus.Size = new Size(822, 917);
-            tabPageStatus.TabIndex = 0;
-            tabPageStatus.Text = "Status";
-            tabPageStatus.UseVisualStyleBackColor = true;
+            tabPageLedTest.Controls.Add(ledTestView);
+            tabPageLedTest.Location = new Point(4, 60);
+            tabPageLedTest.Name = "tabPageLedTest";
+            tabPageLedTest.Padding = new Padding(3);
+            tabPageLedTest.Size = new Size(822, 891);
+            tabPageLedTest.TabIndex = 3;
+            tabPageLedTest.Text = "LED Test";
+            tabPageLedTest.UseVisualStyleBackColor = true;
             // 
-            // statusView
+            // ledTestView
             // 
-            statusView.Location = new Point(17, 18);
-            statusView.Name = "statusView";
-            statusView.Size = new Size(705, 800);
-            statusView.TabIndex = 0;
+            ledTestView.Location = new Point(16, 12);
+            ledTestView.Name = "ledTestView";
+            ledTestView.Size = new Size(800, 899);
+            ledTestView.TabIndex = 0;
             // 
             // tabPageCommand
             // 
             tabPageCommand.Controls.Add(outputCommandView);
-            tabPageCommand.Location = new Point(4, 34);
+            tabPageCommand.Location = new Point(4, 60);
             tabPageCommand.Margin = new Padding(4, 5, 4, 5);
             tabPageCommand.Name = "tabPageCommand";
             tabPageCommand.Padding = new Padding(4, 5, 4, 5);
-            tabPageCommand.Size = new Size(822, 917);
+            tabPageCommand.Size = new Size(822, 891);
             tabPageCommand.TabIndex = 1;
             tabPageCommand.Text = "Outputs Command";
             tabPageCommand.UseVisualStyleBackColor = true;
@@ -163,11 +163,11 @@
             // tabPageInputConfig
             // 
             tabPageInputConfig.Controls.Add(inputConfiigView);
-            tabPageInputConfig.Location = new Point(4, 34);
+            tabPageInputConfig.Location = new Point(4, 60);
             tabPageInputConfig.Margin = new Padding(4, 5, 4, 5);
             tabPageInputConfig.Name = "tabPageInputConfig";
             tabPageInputConfig.Padding = new Padding(4, 5, 4, 5);
-            tabPageInputConfig.Size = new Size(822, 917);
+            tabPageInputConfig.Size = new Size(822, 891);
             tabPageInputConfig.TabIndex = 2;
             tabPageInputConfig.Text = "Input Config";
             tabPageInputConfig.UseVisualStyleBackColor = true;
@@ -180,23 +180,24 @@
             inputConfiigView.Size = new Size(650, 887);
             inputConfiigView.TabIndex = 0;
             // 
-            // tabPageLedTest
+            // tabPageStatus
             // 
-            tabPageLedTest.Controls.Add(ledTestView);
-            tabPageLedTest.Location = new Point(4, 34);
-            tabPageLedTest.Name = "tabPageLedTest";
-            tabPageLedTest.Padding = new Padding(3);
-            tabPageLedTest.Size = new Size(822, 917);
-            tabPageLedTest.TabIndex = 3;
-            tabPageLedTest.Text = "LED Test";
-            tabPageLedTest.UseVisualStyleBackColor = true;
+            tabPageStatus.Controls.Add(statusView);
+            tabPageStatus.Location = new Point(4, 60);
+            tabPageStatus.Margin = new Padding(4, 5, 4, 5);
+            tabPageStatus.Name = "tabPageStatus";
+            tabPageStatus.Padding = new Padding(4, 5, 4, 5);
+            tabPageStatus.Size = new Size(822, 891);
+            tabPageStatus.TabIndex = 0;
+            tabPageStatus.Text = "Status";
+            tabPageStatus.UseVisualStyleBackColor = true;
             // 
-            // ledTestView
+            // statusView
             // 
-            ledTestView.Location = new Point(16, 12);
-            ledTestView.Name = "ledTestView";
-            ledTestView.Size = new Size(800, 899);
-            ledTestView.TabIndex = 0;
+            statusView.Location = new Point(17, 18);
+            statusView.Name = "statusView";
+            statusView.Size = new Size(705, 800);
+            statusView.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -215,10 +216,10 @@
             Name = "MainForm";
             Text = "HID Test App";
             tabsStatusCommand.ResumeLayout(false);
-            tabPageStatus.ResumeLayout(false);
+            tabPageLedTest.ResumeLayout(false);
             tabPageCommand.ResumeLayout(false);
             tabPageInputConfig.ResumeLayout(false);
-            tabPageLedTest.ResumeLayout(false);
+            tabPageStatus.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
