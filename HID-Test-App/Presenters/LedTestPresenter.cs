@@ -21,7 +21,8 @@ namespace HID_Test_App.Presenters
                 "Blue 2",
                 "Red 3",
                 "Green 3",
-                "Blue 3"
+                "Blue 3",
+                "N/A"
             ];
 
         public LedTestPresenter(ILedTestView ledTestView, IHidService hidService)
@@ -30,11 +31,19 @@ namespace HID_Test_App.Presenters
             _hidService = hidService;
 
             _ledTestView.StartClicked += LedTestView_StartClicked;
+            _ledTestView.StartEnabled = false;
 
             _testTimer = new System.Windows.Forms.Timer();
             _testTimer.Interval = 2000;
             _testTimer.Tick += TimerHandler;
             _testCount = 0;
+
+            _hidService.ConnectionChanged += HidService_ConnectionChanged;
+        }
+
+        private void HidService_ConnectionChanged(object? sender, bool connected)
+        {
+            _ledTestView.StartEnabled = connected;
         }
 
         private void LedTestView_StartClicked(object? sender, EventArgs e)
@@ -52,18 +61,17 @@ namespace HID_Test_App.Presenters
 
             SendCurrentCommand();
 
-            if (_testCount == 9) 
+            if (_testCount > 9) 
             {
                 _testTimer.Stop();
                 _ledTestView.StartEnabled = true;
-                _ledTestView.LabelTemp = "N/A";
             }
         }
 
         private void SendCurrentCommand()
         {
             var builder = new OutputCommandBuilder();
-            var usbData = builder
+            builder = builder
                 .WithOutput(0, true, OutputState.Off, 0)
                 .WithOutput(1, true, OutputState.Off, 0)
                 .WithOutput(2, true, OutputState.Off, 0)
@@ -72,9 +80,12 @@ namespace HID_Test_App.Presenters
                 .WithOutput(5, true, OutputState.Off, 0)
                 .WithOutput(6, true, OutputState.Off, 0)
                 .WithOutput(7, true, OutputState.Off, 0)
-                .WithOutput(8, true, OutputState.Off, 0)
-                .WithOutput(_testCount, true, OutputState.On, 0)
-                .BuildLegacyCommandData();
+                .WithOutput(8, true, OutputState.Off, 0);
+            if (_testCount < 9)
+            {
+                builder = builder.WithOutput(_testCount, true, OutputState.On, 0);
+            }
+            var usbData = builder.BuildLegacyCommandData();
             _hidService.Write(0x3F, usbData);
             _testCount++;
         }

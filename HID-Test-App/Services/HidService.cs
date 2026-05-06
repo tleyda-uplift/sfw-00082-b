@@ -10,11 +10,15 @@ namespace HID_Test_App.Services
         void Disconnect();
         void Write(byte reportId, byte[] data);
         byte[] GetReport(byte reportId);
+
+        event EventHandler<bool> ConnectionChanged;
     }
 
     public class HidService : IHidService
     {
         private HidDevice? _hidDevice;
+
+        public event EventHandler<bool>? ConnectionChanged;
 
         public bool Connected => _hidDevice != null;
 
@@ -24,6 +28,8 @@ namespace HID_Test_App.Services
 
             _hidDevice = list.GetHidDevices(vendorId, productId).FirstOrDefault();
 
+            ConnectionChanged?.Invoke(this, _hidDevice != null);
+
             return _hidDevice != null;
         }
 
@@ -32,6 +38,7 @@ namespace HID_Test_App.Services
             if (_hidDevice != null)
             {
                 _hidDevice = null;
+                ConnectionChanged?.Invoke(this, false);
             }
 
         }

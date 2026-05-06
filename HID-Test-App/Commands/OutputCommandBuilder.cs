@@ -58,9 +58,9 @@ namespace HID_Test_App.Commands
             data[25] |= (byte)(outputParams[7].ChangeEnabled ? 0x80 : 0);
             data[25] |= GetControlFunctionBitMask(outputParams[7].State);
             data[26] = (byte)(outputParams[7].DutyCycle);
-            data[27] |= (byte)(outputParams[8].ChangeEnabled ? 0x80 : 0);
-            data[27] |= GetControlFunctionBitMask(outputParams[8].State);
-            data[28] = (byte)(outputParams[8].DutyCycle);
+            data[28] |= (byte)(outputParams[8].ChangeEnabled ? 0x80 : 0);
+            data[28] |= GetControlFunctionBitMask(outputParams[8].State);
+            data[29] = (byte)(outputParams[8].DutyCycle);
 
             return data;
         }
