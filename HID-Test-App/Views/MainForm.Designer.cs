@@ -36,11 +36,13 @@
             btnDisconnect = new Button();
             tabsStatusCommand = new TabControl();
             tabPageStatus = new TabPage();
+            statusView = new StatusView();
             tabPageCommand = new TabPage();
             outputCommandView = new OutputCommandView();
             tabPageInputConfig = new TabPage();
             inputConfiigView = new InputConfiigView();
             tabsStatusCommand.SuspendLayout();
+            tabPageStatus.SuspendLayout();
             tabPageCommand.SuspendLayout();
             tabPageInputConfig.SuspendLayout();
             SuspendLayout();
@@ -48,40 +50,45 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(205, 24);
+            label1.Location = new Point(293, 40);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(25, 15);
+            label1.Size = new Size(41, 25);
             label1.TabIndex = 0;
             label1.Text = "VID";
             // 
             // texboxVendorId
             // 
-            texboxVendorId.Location = new Point(242, 21);
+            texboxVendorId.Location = new Point(346, 35);
+            texboxVendorId.Margin = new Padding(4, 5, 4, 5);
             texboxVendorId.Name = "texboxVendorId";
-            texboxVendorId.Size = new Size(54, 23);
+            texboxVendorId.Size = new Size(75, 31);
             texboxVendorId.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(312, 24);
+            label2.Location = new Point(446, 40);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(25, 15);
+            label2.Size = new Size(40, 25);
             label2.TabIndex = 2;
             label2.Text = "PID";
             // 
             // textBoxProductId
             // 
-            textBoxProductId.Location = new Point(343, 21);
+            textBoxProductId.Location = new Point(490, 35);
+            textBoxProductId.Margin = new Padding(4, 5, 4, 5);
             textBoxProductId.Name = "textBoxProductId";
-            textBoxProductId.Size = new Size(59, 23);
+            textBoxProductId.Size = new Size(83, 31);
             textBoxProductId.TabIndex = 3;
             // 
             // btnConnect
             // 
-            btnConnect.Location = new Point(431, 21);
+            btnConnect.Location = new Point(616, 35);
+            btnConnect.Margin = new Padding(4, 5, 4, 5);
             btnConnect.Name = "btnConnect";
-            btnConnect.Size = new Size(75, 23);
+            btnConnect.Size = new Size(107, 38);
             btnConnect.TabIndex = 4;
             btnConnect.Text = "Connect";
             btnConnect.UseVisualStyleBackColor = true;
@@ -89,9 +96,10 @@
             // 
             // btnDisconnect
             // 
-            btnDisconnect.Location = new Point(512, 21);
+            btnDisconnect.Location = new Point(731, 35);
+            btnDisconnect.Margin = new Padding(4, 5, 4, 5);
             btnDisconnect.Name = "btnDisconnect";
-            btnDisconnect.Size = new Size(75, 23);
+            btnDisconnect.Size = new Size(107, 38);
             btnDisconnect.TabIndex = 5;
             btnDisconnect.Text = "Disconnect";
             btnDisconnect.UseVisualStyleBackColor = true;
@@ -102,64 +110,78 @@
             tabsStatusCommand.Controls.Add(tabPageStatus);
             tabsStatusCommand.Controls.Add(tabPageCommand);
             tabsStatusCommand.Controls.Add(tabPageInputConfig);
-            tabsStatusCommand.Location = new Point(10, 50);
+            tabsStatusCommand.Location = new Point(14, 83);
+            tabsStatusCommand.Margin = new Padding(4, 5, 4, 5);
             tabsStatusCommand.Name = "tabsStatusCommand";
             tabsStatusCommand.SelectedIndex = 0;
-            tabsStatusCommand.Size = new Size(581, 573);
+            tabsStatusCommand.Size = new Size(830, 955);
             tabsStatusCommand.TabIndex = 6;
             // 
             // tabPageStatus
             // 
-            tabPageStatus.Location = new Point(4, 24);
+            tabPageStatus.Controls.Add(statusView);
+            tabPageStatus.Location = new Point(4, 34);
+            tabPageStatus.Margin = new Padding(4, 5, 4, 5);
             tabPageStatus.Name = "tabPageStatus";
-            tabPageStatus.Padding = new Padding(3);
-            tabPageStatus.Size = new Size(573, 545);
+            tabPageStatus.Padding = new Padding(4, 5, 4, 5);
+            tabPageStatus.Size = new Size(822, 917);
             tabPageStatus.TabIndex = 0;
             tabPageStatus.Text = "Status";
             tabPageStatus.UseVisualStyleBackColor = true;
             // 
+            // statusView
+            // 
+            statusView.Location = new Point(17, 18);
+            statusView.Name = "statusView";
+            statusView.Size = new Size(705, 800);
+            statusView.TabIndex = 0;
+            // 
             // tabPageCommand
             // 
             tabPageCommand.Controls.Add(outputCommandView);
-            tabPageCommand.Location = new Point(4, 24);
+            tabPageCommand.Location = new Point(4, 34);
+            tabPageCommand.Margin = new Padding(4, 5, 4, 5);
             tabPageCommand.Name = "tabPageCommand";
-            tabPageCommand.Padding = new Padding(3);
-            tabPageCommand.Size = new Size(573, 545);
+            tabPageCommand.Padding = new Padding(4, 5, 4, 5);
+            tabPageCommand.Size = new Size(822, 917);
             tabPageCommand.TabIndex = 1;
             tabPageCommand.Text = "Outputs Command";
             tabPageCommand.UseVisualStyleBackColor = true;
             // 
             // outputCommandView
             // 
-            outputCommandView.Location = new Point(7, 3);
+            outputCommandView.Location = new Point(10, 5);
+            outputCommandView.Margin = new Padding(6, 8, 6, 8);
             outputCommandView.Name = "outputCommandView";
-            outputCommandView.Size = new Size(560, 540);
+            outputCommandView.Size = new Size(800, 900);
             outputCommandView.TabIndex = 0;
             // 
             // tabPageInputConfig
             // 
             tabPageInputConfig.Controls.Add(inputConfiigView);
-            tabPageInputConfig.Location = new Point(4, 24);
+            tabPageInputConfig.Location = new Point(4, 34);
+            tabPageInputConfig.Margin = new Padding(4, 5, 4, 5);
             tabPageInputConfig.Name = "tabPageInputConfig";
-            tabPageInputConfig.Padding = new Padding(3);
-            tabPageInputConfig.Size = new Size(573, 545);
+            tabPageInputConfig.Padding = new Padding(4, 5, 4, 5);
+            tabPageInputConfig.Size = new Size(822, 917);
             tabPageInputConfig.TabIndex = 2;
             tabPageInputConfig.Text = "Input Config";
             tabPageInputConfig.UseVisualStyleBackColor = true;
             // 
             // inputConfiigView
             // 
-            inputConfiigView.Location = new Point(9, 7);
+            inputConfiigView.Location = new Point(13, 12);
+            inputConfiigView.Margin = new Padding(6, 8, 6, 8);
             inputConfiigView.Name = "inputConfiigView";
-            inputConfiigView.Size = new Size(455, 532);
+            inputConfiigView.Size = new Size(650, 887);
             inputConfiigView.TabIndex = 0;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(603, 666);
+            ClientSize = new Size(861, 1110);
             Controls.Add(tabsStatusCommand);
             Controls.Add(btnDisconnect);
             Controls.Add(btnConnect);
@@ -167,9 +189,11 @@
             Controls.Add(label2);
             Controls.Add(texboxVendorId);
             Controls.Add(label1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "MainForm";
             Text = "HID Test App";
             tabsStatusCommand.ResumeLayout(false);
+            tabPageStatus.ResumeLayout(false);
             tabPageCommand.ResumeLayout(false);
             tabPageInputConfig.ResumeLayout(false);
             ResumeLayout(false);
@@ -190,5 +214,6 @@
         private OutputCommandView outputCommandView;
         private TabPage tabPageInputConfig;
         private InputConfiigView inputConfiigView;
+        private StatusView statusView;
     }
 }

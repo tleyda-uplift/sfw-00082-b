@@ -9,6 +9,7 @@ namespace HID_Test_App.Services
         bool Connect(int vendorId, int productId);
         void Disconnect();
         void Write(byte reportId, byte[] data);
+        byte[] GetReport(byte reportId);
     }
 
     public class HidService : IHidService
@@ -32,12 +33,12 @@ namespace HID_Test_App.Services
             {
                 _hidDevice = null;
             }
-            
+
         }
 
         public void Write(byte reportId, byte[] data)
         {
-            if (_hidDevice != null && _hidDevice.TryOpen(out DeviceStream stream))
+            if (_hidDevice != null && _hidDevice.TryOpen(out HidStream stream))
             {
                 using (stream)
                 {
@@ -50,6 +51,25 @@ namespace HID_Test_App.Services
                 }
 
             }
+        }
+
+        public byte[] GetReport(byte reportId)
+        {
+            if (_hidDevice != null && _hidDevice.TryOpen(out HidStream stream))
+            {
+                var reportDescriptor = _hidDevice.GetReportDescriptor();
+                Console.WriteLine(reportDescriptor.InputReports);
+                using (stream)
+                {
+                    byte[] outputReport = new byte[_hidDevice.GetMaxOutputReportLength()];
+                    outputReport[0] = reportId;
+                    outputReport[1] = reportId;
+                    stream.Write(outputReport);
+
+                    return stream.Read();
+                }
+            }
+            return [];
         }
     }
 }
