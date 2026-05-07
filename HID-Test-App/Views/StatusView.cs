@@ -14,6 +14,9 @@ namespace HID_Test_App.Views
     {
         private StatusPresenter? _presenter;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string RawStatus { get => textBoxRawStatus.Text; set => textBoxRawStatus.Text = value; }
+
         public StatusView()
         {
             InitializeComponent();

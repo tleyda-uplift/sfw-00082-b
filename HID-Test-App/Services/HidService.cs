@@ -1,4 +1,6 @@
 ﻿using HidSharp;
+using HidSharp.Reports;
+using System.Diagnostics;
 
 namespace HID_Test_App.Services
 {
@@ -53,7 +55,7 @@ namespace HID_Test_App.Services
                     byte[] outputReport = new byte[_hidDevice.GetMaxOutputReportLength()];
 
                     data.CopyTo(outputReport, 1);
-                    outputReport[0] = 0x3F;
+                    outputReport[0] = reportId;
                     stream.Write(outputReport);
                 }
 
@@ -62,20 +64,19 @@ namespace HID_Test_App.Services
 
         public byte[] GetReport(byte reportId)
         {
+            Write(0x40, []);
             if (_hidDevice != null && _hidDevice.TryOpen(out HidStream stream))
             {
                 var reportDescriptor = _hidDevice.GetReportDescriptor();
                 Console.WriteLine(reportDescriptor.InputReports);
                 using (stream)
                 {
-                    byte[] outputReport = new byte[_hidDevice.GetMaxOutputReportLength()];
-                    outputReport[0] = reportId;
-                    outputReport[1] = reportId;
-                    stream.Write(outputReport);
-
-                    return stream.Read();
+                    int inputLength = _hidDevice.GetMaxInputReportLength();
+                    byte[] inReport = new byte[inputLength];
+                    stream.Read(inReport, 0, inputLength);
+                    return inReport;
                 }
-            }
+             }
             return [];
         }
     }

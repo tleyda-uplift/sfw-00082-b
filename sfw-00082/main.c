@@ -137,15 +137,27 @@ VOID main (VOID)
                 if (bHIDDataReceived_event){
  
                     // Store contents of USB buffer
-                    hidReceiveDataInBuffer((BYTE*)wholeString, MAX_STR_LENGTH, HID0_INTFNUM);
+                    // hidReceiveDataInBuffer((BYTE*)wholeString, MAX_STR_LENGTH, HID0_INTFNUM);
+                    USBHID_receiveReport((BYTE*)wholeString, HID0_INTFNUM);
 
-                    if(wholeString[0] == 0x37) // A correct Byte 0 indicates this data is good
-                    {
-						setOutputs((BYTE*)wholeString);
+                    if (wholeString[0] == 0x3F) {
+                        if(wholeString[2] == 0x37) // A correct Byte 0 indicates this data is good
+                        {
+                            setOutputs((BYTE*)(wholeString + 2));
+                        } else if (wholeString[2] == 0x38) {
+                            configureInputs((BYTE*)(wholeString + 2));
+                        }
+                    }
+                    else if (wholeString[0] == 0x40) {
+                        uint8_t idx;
                         resetReportBuffer();
                         getInputsReport(reportBuffer);
-                    } else if (wholeString[0] == 0x38) {
-                        configureInputs((BYTE*)wholeString);
+
+                        for (idx = 0; idx < 10; ++idx) {
+                            if(USBHID_sendReport(reportBuffer, HID0_INTFNUM) == kUSBHID_sendComplete) {
+                                break;
+                            }
+                        }
                     }
                     
                     // Reset buffers and flags
