@@ -16,6 +16,8 @@ namespace HID_Test_App.Views
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string RawStatus { get => textBoxRawStatus.Text; set => textBoxRawStatus.Text = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public object InputStatusDataSource { set => listBoxInputStatus.DataSource = value; }
 
         public StatusView()
         {

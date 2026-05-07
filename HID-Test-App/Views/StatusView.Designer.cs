@@ -30,6 +30,7 @@
         {
             btnRequestStatus = new Button();
             textBoxRawStatus = new TextBox();
+            listBoxInputStatus = new ListBox();
             SuspendLayout();
             // 
             // btnRequestStatus
@@ -48,18 +49,28 @@
             textBoxRawStatus.Location = new Point(143, 17);
             textBoxRawStatus.Multiline = true;
             textBoxRawStatus.Name = "textBoxRawStatus";
-            textBoxRawStatus.Size = new Size(278, 62);
+            textBoxRawStatus.Size = new Size(406, 62);
             textBoxRawStatus.TabIndex = 1;
+            // 
+            // listBoxInputStatus
+            // 
+            listBoxInputStatus.Font = new Font("Segoe UI", 12F);
+            listBoxInputStatus.FormattingEnabled = true;
+            listBoxInputStatus.Location = new Point(21, 93);
+            listBoxInputStatus.Name = "listBoxInputStatus";
+            listBoxInputStatus.Size = new Size(260, 235);
+            listBoxInputStatus.TabIndex = 2;
             // 
             // StatusView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(listBoxInputStatus);
             Controls.Add(textBoxRawStatus);
             Controls.Add(btnRequestStatus);
             Margin = new Padding(2);
             Name = "StatusView";
-            Size = new Size(483, 393);
+            Size = new Size(570, 515);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -68,5 +79,6 @@
 
         private Button btnRequestStatus;
         private TextBox textBoxRawStatus;
+        private ListBox listBoxInputStatus;
     }
 }
