@@ -7,10 +7,18 @@ namespace HID_Test_App.Presenters
 {
     public class LedTestPresenter
     {
+        enum TestState
+        {
+            Reset,
+            Manual,
+            Running
+        }
+        private TestState _testState;
         private readonly ILedTestView _ledTestView;
         private readonly IHidService _hidService;
         private System.Windows.Forms.Timer _testTimer;
         private int _testCount;
+        private bool _hidConnected;
         private readonly string[] TestDisplay = 
             [
                 "LED 1 - Red",
@@ -35,12 +43,18 @@ namespace HID_Test_App.Presenters
         {
             _ledTestView = ledTestView;
             _hidService = hidService;
-            _testCount = 10;
+            _testCount = 9;
+            _testState = TestState.Reset;
+            _hidConnected = false;
 
-            _ledTestView.StartClicked += LedTestView_StartClicked;
-            _ledTestView.StartEnabled = false;
+            _ledTestView.RunPauseClicked += LedTestView_StartClicked;
+            _ledTestView.PrevClicked += LedTestView_PrevClicked;
+            _ledTestView.NextClicked += LedTestView_NextClicked;
+            _ledTestView.ResetClicked += LedTestView_ResetClicked;
+
             _ledTestView.StatusText = "N/A";
             SetLedColors();
+            SetButtonStates();
 
             _testTimer = new System.Windows.Forms.Timer();
             _testTimer.Interval = 2000;
@@ -49,31 +63,127 @@ namespace HID_Test_App.Presenters
             _hidService.ConnectionChanged += HidService_ConnectionChanged;
         }
 
+        private void LedTestView_ResetClicked(object? sender, EventArgs e)
+        {
+            _testCount = 9;
+            _testState = TestState.Reset;
+            _ledTestView.StatusText = "N/A";
+            SetButtonStates();
+            SetLedColors();
+        }
+
+        private void LedTestView_NextClicked(object? sender, EventArgs e)
+        {
+            if (_testState == TestState.Reset)
+            {
+                _testCount = 0;
+            }
+            else
+            {
+                _testCount++;
+            }
+            _testState = TestState.Manual;
+            _ledTestView.StatusText = TestDisplay[_testCount];
+            SetButtonStates();
+            SetLedColors();
+            SendCurrentCommand();
+        }
+
+        private void LedTestView_PrevClicked(object? sender, EventArgs e)
+        {
+            _testCount--;
+            _testState = TestState.Manual;
+            _ledTestView.StatusText = TestDisplay[_testCount];
+            SetButtonStates();
+            SetLedColors();
+            SendCurrentCommand();
+        }
+
+        private void SetButtonStates()
+        {
+            if (_hidConnected)
+            {
+                switch (_testState) 
+                {
+                    case TestState.Reset:
+                        _ledTestView.RunPauseText = "Run";
+                        _ledTestView.RunPauseEnabled = true;
+                        _ledTestView.PrevEnabled = false;
+                        _ledTestView.NextEnabled = true;
+                        _ledTestView.ResetEnabled = false;
+                        break;
+                    case TestState.Manual:
+                        _ledTestView.RunPauseText = "Run";
+                        _ledTestView.RunPauseEnabled = true;
+                        _ledTestView.PrevEnabled = _testCount > 0;
+                        _ledTestView.NextEnabled = _testCount < 8;
+                        _ledTestView.ResetEnabled = true;
+                        break;
+                    case TestState.Running:
+                        _ledTestView.RunPauseText = "Pause";
+                        _ledTestView.RunPauseEnabled = true;
+                        _ledTestView.PrevEnabled = false;
+                        _ledTestView.NextEnabled = false;
+                        _ledTestView.ResetEnabled = false;
+                        break;
+                } 
+            }
+            else
+            {
+                _ledTestView.RunPauseEnabled = false;
+                _ledTestView.PrevEnabled = false;
+                _ledTestView.NextEnabled = false;
+                _ledTestView.ResetEnabled = false;
+            }
+        }
+
         private void HidService_ConnectionChanged(object? sender, bool connected)
         {
-            _ledTestView.StartEnabled = connected;
+            _hidConnected = connected;
+            SetButtonStates();
         }
 
         private void LedTestView_StartClicked(object? sender, EventArgs e)
         {
-            _ledTestView.StartEnabled = false;
-            _testCount = 0;
-            _ledTestView.StatusText = TestDisplay[_testCount];
-            SetLedColors();
-            SendCurrentCommand();
-            _testTimer.Start();
+            if (_testState == TestState.Reset)
+            {
+                _testCount = 0;
+                _testState = TestState.Running;
+                _ledTestView.StatusText = TestDisplay[_testCount];
+                SetLedColors();
+                SetButtonStates();
+                SendCurrentCommand();
+                _testTimer.Start();
+            }
+            else if (_testState == TestState.Manual)
+            {
+                _testState = TestState.Running;
+                SetButtonStates();
+                _testTimer.Start();
+            }
+            else
+            {
+                _testTimer.Stop();
+                _testState = TestState.Manual;
+                SetButtonStates();
+            }
         }
 
         private void TimerHandler(object? sender, EventArgs e)
         {
-            _ledTestView.StatusText = TestDisplay[_testCount];
-            SetLedColors();
-            SendCurrentCommand();
+            if (_testCount < 9)
+            {
+                _testCount++;
+                _ledTestView.StatusText = TestDisplay[_testCount];
+                SetLedColors();
+                SendCurrentCommand();
+            }
 
-            if (_testCount > 9) 
+            if (_testCount >= 9) 
             {
                 _testTimer.Stop();
-                _ledTestView.StartEnabled = true;
+                _testState = TestState.Reset;
+                SetButtonStates();
             }
         }
 
@@ -125,7 +235,6 @@ namespace HID_Test_App.Presenters
             }
             var usbData = builder.BuildLegacyCommandData();
             _hidService.Write(0x3F, usbData);
-            _testCount++;
         }
     }
 }
