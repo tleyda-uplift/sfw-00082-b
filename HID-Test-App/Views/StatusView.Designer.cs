@@ -45,7 +45,7 @@
             textBoxRawStatus.Location = new Point(18, 412);
             textBoxRawStatus.Multiline = true;
             textBoxRawStatus.Name = "textBoxRawStatus";
-            textBoxRawStatus.Size = new Size(473, 62);
+            textBoxRawStatus.Size = new Size(512, 62);
             textBoxRawStatus.TabIndex = 1;
             // 
             // listBoxInputStatus1
@@ -55,7 +55,7 @@
             listBoxInputStatus1.Location = new Point(6, 22);
             listBoxInputStatus1.Name = "listBoxInputStatus1";
             listBoxInputStatus1.SelectionMode = SelectionMode.None;
-            listBoxInputStatus1.Size = new Size(135, 172);
+            listBoxInputStatus1.Size = new Size(160, 172);
             listBoxInputStatus1.TabIndex = 2;
             // 
             // groupBox1
@@ -63,7 +63,7 @@
             groupBox1.Controls.Add(listBoxInputStatus1);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(148, 204);
+            groupBox1.Size = new Size(172, 204);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Port 1";
@@ -71,9 +71,9 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(listBoxInputStatus2);
-            groupBox2.Location = new Point(176, 12);
+            groupBox2.Location = new Point(188, 12);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(148, 204);
+            groupBox2.Size = new Size(172, 204);
             groupBox2.TabIndex = 4;
             groupBox2.TabStop = false;
             groupBox2.Text = "Port 2";
@@ -85,15 +85,15 @@
             listBoxInputStatus2.Location = new Point(6, 22);
             listBoxInputStatus2.Name = "listBoxInputStatus2";
             listBoxInputStatus2.SelectionMode = SelectionMode.None;
-            listBoxInputStatus2.Size = new Size(135, 172);
+            listBoxInputStatus2.Size = new Size(160, 172);
             listBoxInputStatus2.TabIndex = 2;
             // 
             // groupBox3
             // 
             groupBox3.Controls.Add(listBoxInputStatus3);
-            groupBox3.Location = new Point(343, 12);
+            groupBox3.Location = new Point(364, 12);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(148, 204);
+            groupBox3.Size = new Size(172, 204);
             groupBox3.TabIndex = 5;
             groupBox3.TabStop = false;
             groupBox3.Text = "Port 3";
@@ -105,7 +105,7 @@
             listBoxInputStatus3.Location = new Point(6, 22);
             listBoxInputStatus3.Name = "listBoxInputStatus3";
             listBoxInputStatus3.SelectionMode = SelectionMode.None;
-            listBoxInputStatus3.Size = new Size(135, 172);
+            listBoxInputStatus3.Size = new Size(160, 172);
             listBoxInputStatus3.TabIndex = 2;
             // 
             // StatusView

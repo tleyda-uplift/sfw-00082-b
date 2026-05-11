@@ -119,9 +119,9 @@
             // 
             tabPageLedTest.Controls.Add(ledTestView);
             tabPageLedTest.Location = new Point(4, 50);
-            tabPageLedTest.Margin = new Padding(2, 2, 2, 2);
+            tabPageLedTest.Margin = new Padding(2);
             tabPageLedTest.Name = "tabPageLedTest";
-            tabPageLedTest.Padding = new Padding(2, 2, 2, 2);
+            tabPageLedTest.Padding = new Padding(2);
             tabPageLedTest.Size = new Size(573, 550);
             tabPageLedTest.TabIndex = 3;
             tabPageLedTest.Text = "LED Test";
@@ -130,7 +130,7 @@
             // ledTestView
             // 
             ledTestView.Location = new Point(11, 7);
-            ledTestView.Margin = new Padding(1, 1, 1, 1);
+            ledTestView.Margin = new Padding(1);
             ledTestView.Name = "ledTestView";
             ledTestView.Size = new Size(560, 539);
             ledTestView.TabIndex = 0;
@@ -140,8 +140,8 @@
             tabPageCommand.Controls.Add(outputCommandView);
             tabPageCommand.Location = new Point(4, 50);
             tabPageCommand.Name = "tabPageCommand";
-            tabPageCommand.Padding = new Padding(3, 3, 3, 3);
-            tabPageCommand.Size = new Size(573, 519);
+            tabPageCommand.Padding = new Padding(3);
+            tabPageCommand.Size = new Size(573, 550);
             tabPageCommand.TabIndex = 1;
             tabPageCommand.Text = "Outputs Command";
             tabPageCommand.UseVisualStyleBackColor = true;
@@ -159,8 +159,8 @@
             tabPageInputConfig.Controls.Add(inputConfiigView);
             tabPageInputConfig.Location = new Point(4, 50);
             tabPageInputConfig.Name = "tabPageInputConfig";
-            tabPageInputConfig.Padding = new Padding(3, 3, 3, 3);
-            tabPageInputConfig.Size = new Size(573, 519);
+            tabPageInputConfig.Padding = new Padding(3);
+            tabPageInputConfig.Size = new Size(573, 550);
             tabPageInputConfig.TabIndex = 2;
             tabPageInputConfig.Text = "Input Config";
             tabPageInputConfig.UseVisualStyleBackColor = true;
@@ -178,8 +178,8 @@
             tabPageStatus.Controls.Add(statusView);
             tabPageStatus.Location = new Point(4, 50);
             tabPageStatus.Name = "tabPageStatus";
-            tabPageStatus.Padding = new Padding(3, 3, 3, 3);
-            tabPageStatus.Size = new Size(573, 519);
+            tabPageStatus.Padding = new Padding(3);
+            tabPageStatus.Size = new Size(573, 550);
             tabPageStatus.TabIndex = 0;
             tabPageStatus.Text = "Status";
             tabPageStatus.UseVisualStyleBackColor = true;
@@ -187,9 +187,9 @@
             // statusView
             // 
             statusView.Location = new Point(12, 11);
-            statusView.Margin = new Padding(1, 1, 1, 1);
+            statusView.Margin = new Padding(1);
             statusView.Name = "statusView";
-            statusView.Size = new Size(494, 480);
+            statusView.Size = new Size(557, 480);
             statusView.TabIndex = 0;
             // 
             // MainForm
