@@ -47,10 +47,10 @@
             checkBoxInputEnable4 = new CheckBox();
             groupBox6 = new GroupBox();
             comboBoxResistor5 = new ComboBox();
-            checkBoxInputEnable5 = new CheckBox();
             groupBox7 = new GroupBox();
             comboBoxResistor6 = new ComboBox();
             checkBoxInputEnable6 = new CheckBox();
+            checkBoxInputEnable5 = new CheckBox();
             groupBox8 = new GroupBox();
             comboBoxResistor7 = new ComboBox();
             checkBoxInputEnable7 = new CheckBox();
@@ -72,10 +72,11 @@
             comboBoxInputPort.Name = "comboBoxInputPort";
             comboBoxInputPort.Size = new Size(121, 23);
             comboBoxInputPort.TabIndex = 0;
+            comboBoxInputPort.SelectedIndexChanged += comboBoxInputPort_SelectedIndexChanged;
             // 
             // btnInputConfigSend
             // 
-            btnInputConfigSend.Location = new Point(285, 17);
+            btnInputConfigSend.Location = new Point(280, 17);
             btnInputConfigSend.Name = "btnInputConfigSend";
             btnInputConfigSend.Size = new Size(75, 53);
             btnInputConfigSend.TabIndex = 1;
@@ -97,7 +98,7 @@
             // 
             groupBox1.Controls.Add(comboBoxResistor0);
             groupBox1.Controls.Add(checkBoxInputEnable0);
-            groupBox1.Location = new Point(19, 97);
+            groupBox1.Location = new Point(16, 78);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(250, 52);
             groupBox1.TabIndex = 3;
@@ -117,7 +118,7 @@
             // 
             groupBox2.Controls.Add(comboBoxResistor1);
             groupBox2.Controls.Add(checkBoxInputEnable1);
-            groupBox2.Location = new Point(19, 146);
+            groupBox2.Location = new Point(16, 128);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(250, 52);
             groupBox2.TabIndex = 4;
@@ -147,7 +148,7 @@
             // 
             groupBox3.Controls.Add(comboBoxResistor2);
             groupBox3.Controls.Add(checkBoxInputEnable2);
-            groupBox3.Location = new Point(16, 195);
+            groupBox3.Location = new Point(16, 177);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(250, 52);
             groupBox3.TabIndex = 5;
@@ -177,7 +178,7 @@
             // 
             groupBox4.Controls.Add(comboBoxResistor3);
             groupBox4.Controls.Add(checkBoxInputEnable3);
-            groupBox4.Location = new Point(19, 244);
+            groupBox4.Location = new Point(16, 226);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(250, 52);
             groupBox4.TabIndex = 6;
@@ -207,7 +208,7 @@
             // 
             groupBox5.Controls.Add(comboBoxResistor4);
             groupBox5.Controls.Add(checkBoxInputEnable4);
-            groupBox5.Location = new Point(19, 293);
+            groupBox5.Location = new Point(16, 275);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(250, 52);
             groupBox5.TabIndex = 7;
@@ -237,7 +238,7 @@
             // 
             groupBox6.Controls.Add(comboBoxResistor5);
             groupBox6.Controls.Add(checkBoxInputEnable5);
-            groupBox6.Location = new Point(16, 342);
+            groupBox6.Location = new Point(16, 324);
             groupBox6.Name = "groupBox6";
             groupBox6.Size = new Size(250, 52);
             groupBox6.TabIndex = 8;
@@ -253,21 +254,11 @@
             comboBoxResistor5.Size = new Size(121, 23);
             comboBoxResistor5.TabIndex = 3;
             // 
-            // checkBoxInputEnable5
-            // 
-            checkBoxInputEnable5.AutoSize = true;
-            checkBoxInputEnable5.Location = new Point(6, 22);
-            checkBoxInputEnable5.Name = "checkBoxInputEnable5";
-            checkBoxInputEnable5.Size = new Size(61, 19);
-            checkBoxInputEnable5.TabIndex = 2;
-            checkBoxInputEnable5.Text = "Enable";
-            checkBoxInputEnable5.UseVisualStyleBackColor = true;
-            // 
             // groupBox7
             // 
             groupBox7.Controls.Add(comboBoxResistor6);
             groupBox7.Controls.Add(checkBoxInputEnable6);
-            groupBox7.Location = new Point(22, 391);
+            groupBox7.Location = new Point(16, 373);
             groupBox7.Name = "groupBox7";
             groupBox7.Size = new Size(250, 52);
             groupBox7.TabIndex = 9;
@@ -293,11 +284,21 @@
             checkBoxInputEnable6.Text = "Enable";
             checkBoxInputEnable6.UseVisualStyleBackColor = true;
             // 
+            // checkBoxInputEnable5
+            // 
+            checkBoxInputEnable5.AutoSize = true;
+            checkBoxInputEnable5.Location = new Point(6, 22);
+            checkBoxInputEnable5.Name = "checkBoxInputEnable5";
+            checkBoxInputEnable5.Size = new Size(61, 19);
+            checkBoxInputEnable5.TabIndex = 2;
+            checkBoxInputEnable5.Text = "Enable";
+            checkBoxInputEnable5.UseVisualStyleBackColor = true;
+            // 
             // groupBox8
             // 
             groupBox8.Controls.Add(comboBoxResistor7);
             groupBox8.Controls.Add(checkBoxInputEnable7);
-            groupBox8.Location = new Point(19, 440);
+            groupBox8.Location = new Point(16, 422);
             groupBox8.Name = "groupBox8";
             groupBox8.Size = new Size(250, 52);
             groupBox8.TabIndex = 10;

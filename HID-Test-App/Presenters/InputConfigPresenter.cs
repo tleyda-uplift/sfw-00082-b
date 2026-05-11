@@ -16,6 +16,19 @@ namespace HID_Test_App.Presenters
             _hidService = hidService;
 
             _inputConfigView.InputPort = 0;
+            ResetInputs();
+
+            _inputConfigView.SendClicked += InputConfigView_SendClicked;
+            _inputConfigView.PortChanged += InputConfigView_PortChanged;
+        }
+
+        private void InputConfigView_PortChanged(object? sender, EventArgs e)
+        {
+            ResetInputs();
+        }
+
+        private void ResetInputs()
+        {
             _inputConfigView.InputEnable0 = false;
             _inputConfigView.InputEnable1 = false;
             _inputConfigView.InputEnable2 = false;
@@ -33,7 +46,6 @@ namespace HID_Test_App.Presenters
             _inputConfigView.PullResistor6 = 0;
             _inputConfigView.PullResistor7 = 0;
 
-            _inputConfigView.SendClicked += InputConfigView_SendClicked;
         }
 
         private void InputConfigView_SendClicked(object? sender, EventArgs e)

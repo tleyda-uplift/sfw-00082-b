@@ -25,5 +25,6 @@ namespace HID_Test_App.Views
         int PullResistor7 { get; set; }
 
         event EventHandler SendClicked;
+        event EventHandler PortChanged;
     }
 }

@@ -22,6 +22,11 @@ namespace HID_Test_App.Views
             SendClicked?.Invoke(this, EventArgs.Empty);
         }
 
+        private void comboBoxInputPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PortChanged?.Invoke(this, e);
+        }
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int InputPort { get => comboBoxInputPort.SelectedIndex; set => comboBoxInputPort.SelectedIndex = value; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -58,5 +63,6 @@ namespace HID_Test_App.Views
         public int PullResistor7 { get => comboBoxResistor7.SelectedIndex; set => comboBoxResistor7.SelectedIndex = value; }
 
         public event EventHandler? SendClicked;
+        public event EventHandler? PortChanged;
     }
 }
