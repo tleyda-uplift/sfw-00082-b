@@ -10,8 +10,10 @@ namespace HID_Test_App.Views
     {
         string RawStatus { get; set; }
 
-        event EventHandler RequestClicked;
-
-        void SetInputStatusDataSource(BindingList<InputStatus> statusList);
+        void SetInputStatusDataSource(
+            BindingList<InputStatus> statusList1,
+            BindingList<InputStatus> statusList2,
+            BindingList<InputStatus> statusList3
+        );
     }
 }

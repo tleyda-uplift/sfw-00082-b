@@ -58,8 +58,8 @@ namespace HID_Test_App.Models
         override public string ToString()
         {
             return Enabled 
-                ? $"Input {Port}.{Input} - {(Resistor == InputResistor.PullUp ? "Pull Up" : "Pull Down")}: {(State ? "High" : "Low")}"
-                : $"Input {Port}.{Input} - Disabled";
+                ? $"{Input} - {(Resistor == InputResistor.PullUp ? "Pull Up" : "Pull Down")}: {(State ? "High" : "Low")}"
+                : $"{Input} - Disabled";
         }
     }
 }

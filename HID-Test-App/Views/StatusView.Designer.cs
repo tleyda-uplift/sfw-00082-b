@@ -28,57 +28,111 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnRequestStatus = new Button();
             textBoxRawStatus = new TextBox();
-            listBoxInputStatus = new ListBox();
+            listBoxInputStatus1 = new ListBox();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            listBoxInputStatus2 = new ListBox();
+            groupBox3 = new GroupBox();
+            listBoxInputStatus3 = new ListBox();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
-            // 
-            // btnRequestStatus
-            // 
-            btnRequestStatus.Location = new Point(15, 28);
-            btnRequestStatus.Margin = new Padding(2);
-            btnRequestStatus.Name = "btnRequestStatus";
-            btnRequestStatus.Size = new Size(110, 51);
-            btnRequestStatus.TabIndex = 0;
-            btnRequestStatus.Text = "Request";
-            btnRequestStatus.UseVisualStyleBackColor = true;
-            btnRequestStatus.Click += btnRequestStatus_Click;
             // 
             // textBoxRawStatus
             // 
-            textBoxRawStatus.Location = new Point(143, 17);
+            textBoxRawStatus.Location = new Point(18, 412);
             textBoxRawStatus.Multiline = true;
             textBoxRawStatus.Name = "textBoxRawStatus";
-            textBoxRawStatus.Size = new Size(406, 62);
+            textBoxRawStatus.Size = new Size(473, 62);
             textBoxRawStatus.TabIndex = 1;
             // 
-            // listBoxInputStatus
+            // listBoxInputStatus1
             // 
-            listBoxInputStatus.Font = new Font("Segoe UI", 12F);
-            listBoxInputStatus.FormattingEnabled = true;
-            listBoxInputStatus.Location = new Point(21, 93);
-            listBoxInputStatus.Name = "listBoxInputStatus";
-            listBoxInputStatus.Size = new Size(260, 235);
-            listBoxInputStatus.TabIndex = 2;
+            listBoxInputStatus1.Font = new Font("Segoe UI", 12F);
+            listBoxInputStatus1.FormattingEnabled = true;
+            listBoxInputStatus1.Location = new Point(6, 22);
+            listBoxInputStatus1.Name = "listBoxInputStatus1";
+            listBoxInputStatus1.SelectionMode = SelectionMode.None;
+            listBoxInputStatus1.Size = new Size(135, 172);
+            listBoxInputStatus1.TabIndex = 2;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(listBoxInputStatus1);
+            groupBox1.Location = new Point(12, 12);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(148, 204);
+            groupBox1.TabIndex = 3;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Port 1";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(listBoxInputStatus2);
+            groupBox2.Location = new Point(176, 12);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(148, 204);
+            groupBox2.TabIndex = 4;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Port 2";
+            // 
+            // listBoxInputStatus2
+            // 
+            listBoxInputStatus2.Font = new Font("Segoe UI", 12F);
+            listBoxInputStatus2.FormattingEnabled = true;
+            listBoxInputStatus2.Location = new Point(6, 22);
+            listBoxInputStatus2.Name = "listBoxInputStatus2";
+            listBoxInputStatus2.SelectionMode = SelectionMode.None;
+            listBoxInputStatus2.Size = new Size(135, 172);
+            listBoxInputStatus2.TabIndex = 2;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(listBoxInputStatus3);
+            groupBox3.Location = new Point(343, 12);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(148, 204);
+            groupBox3.TabIndex = 5;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Port 3";
+            // 
+            // listBoxInputStatus3
+            // 
+            listBoxInputStatus3.Font = new Font("Segoe UI", 12F);
+            listBoxInputStatus3.FormattingEnabled = true;
+            listBoxInputStatus3.Location = new Point(6, 22);
+            listBoxInputStatus3.Name = "listBoxInputStatus3";
+            listBoxInputStatus3.SelectionMode = SelectionMode.None;
+            listBoxInputStatus3.Size = new Size(135, 172);
+            listBoxInputStatus3.TabIndex = 2;
             // 
             // StatusView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(listBoxInputStatus);
+            Controls.Add(groupBox3);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
             Controls.Add(textBoxRawStatus);
-            Controls.Add(btnRequestStatus);
             Margin = new Padding(2);
             Name = "StatusView";
             Size = new Size(570, 515);
+            groupBox1.ResumeLayout(false);
+            groupBox2.ResumeLayout(false);
+            groupBox3.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button btnRequestStatus;
         private TextBox textBoxRawStatus;
-        private ListBox listBoxInputStatus;
+        private ListBox listBoxInputStatus1;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private ListBox listBoxInputStatus2;
+        private GroupBox groupBox3;
+        private ListBox listBoxInputStatus3;
     }
 }

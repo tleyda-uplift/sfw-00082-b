@@ -28,16 +28,11 @@ namespace HID_Test_App.Views
             _presenter = new StatusPresenter(this, hidService);
         }
 
-        public event EventHandler? RequestClicked;
-
-        private void btnRequestStatus_Click(object sender, EventArgs e)
+        public void SetInputStatusDataSource(BindingList<InputStatus> statusList1, BindingList<InputStatus> statusList2, BindingList<InputStatus> statusList3)
         {
-            RequestClicked?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void SetInputStatusDataSource(BindingList<InputStatus> statusList)
-        {
-            listBoxInputStatus.DataSource = statusList;
+            listBoxInputStatus1.DataSource = statusList1;
+            listBoxInputStatus2.DataSource = statusList2;
+            listBoxInputStatus3.DataSource = statusList3;
         }
     }
 }
