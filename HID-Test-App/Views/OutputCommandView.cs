@@ -105,10 +105,16 @@ namespace HID_Test_App.Views
         public string CommandData { get => textBoxCommandData.Text; set => textBoxCommandData.Text = value; }
 
         public event EventHandler? SendClicked;
+        public event EventHandler? PortChanged;
 
         private void btnSend_Click(object sender, EventArgs e)
         {
             SendClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void comboBoxPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PortChanged?.Invoke(this, e);
         }
     }
 }

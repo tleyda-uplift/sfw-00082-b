@@ -104,7 +104,7 @@
             groupBox8.Controls.Add(radioBtnOn7);
             groupBox8.Controls.Add(radioBtnPwm7);
             groupBox8.Controls.Add(numericDutyCycle7);
-            groupBox8.Location = new Point(22, 473);
+            groupBox8.Location = new Point(12, 415);
             groupBox8.Margin = new Padding(2);
             groupBox8.Name = "groupBox8";
             groupBox8.Padding = new Padding(2);
@@ -172,7 +172,7 @@
             groupBox7.Controls.Add(radioBtnOn6);
             groupBox7.Controls.Add(radioBtnPwm6);
             groupBox7.Controls.Add(numericDutyCycle6);
-            groupBox7.Location = new Point(22, 423);
+            groupBox7.Location = new Point(12, 365);
             groupBox7.Margin = new Padding(2);
             groupBox7.Name = "groupBox7";
             groupBox7.Padding = new Padding(2);
@@ -240,7 +240,7 @@
             groupBox6.Controls.Add(radioBtnOn5);
             groupBox6.Controls.Add(radioBtnPwm5);
             groupBox6.Controls.Add(numericDutyCycle5);
-            groupBox6.Location = new Point(22, 370);
+            groupBox6.Location = new Point(12, 312);
             groupBox6.Margin = new Padding(2);
             groupBox6.Name = "groupBox6";
             groupBox6.Padding = new Padding(2);
@@ -308,7 +308,7 @@
             groupBox5.Controls.Add(radioBtnOn4);
             groupBox5.Controls.Add(radioBtnPwm4);
             groupBox5.Controls.Add(numericDutyCycle4);
-            groupBox5.Location = new Point(22, 319);
+            groupBox5.Location = new Point(12, 261);
             groupBox5.Margin = new Padding(2);
             groupBox5.Name = "groupBox5";
             groupBox5.Padding = new Padding(2);
@@ -376,7 +376,7 @@
             groupBox4.Controls.Add(radioBtnOn3);
             groupBox4.Controls.Add(radioBtnPwm3);
             groupBox4.Controls.Add(numericDutyCycle3);
-            groupBox4.Location = new Point(22, 270);
+            groupBox4.Location = new Point(12, 212);
             groupBox4.Margin = new Padding(2);
             groupBox4.Name = "groupBox4";
             groupBox4.Padding = new Padding(2);
@@ -444,7 +444,7 @@
             groupBox3.Controls.Add(radioBtnOn2);
             groupBox3.Controls.Add(radioBtnPwm2);
             groupBox3.Controls.Add(numericDutyCycle2);
-            groupBox3.Location = new Point(22, 225);
+            groupBox3.Location = new Point(12, 167);
             groupBox3.Margin = new Padding(2);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(2);
@@ -512,7 +512,7 @@
             groupBox2.Controls.Add(radioBtnOn1);
             groupBox2.Controls.Add(radioBtnPwm1);
             groupBox2.Controls.Add(numericDutyCycle1);
-            groupBox2.Location = new Point(21, 175);
+            groupBox2.Location = new Point(11, 117);
             groupBox2.Margin = new Padding(2);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(2);
@@ -580,7 +580,7 @@
             groupBox1.Controls.Add(radioBtnOff0);
             groupBox1.Controls.Add(numericDutyCycle0);
             groupBox1.Controls.Add(checkBoxEnableChange0);
-            groupBox1.Location = new Point(22, 126);
+            groupBox1.Location = new Point(12, 68);
             groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(2);
@@ -643,17 +643,17 @@
             // 
             // btnSend
             // 
-            btnSend.Location = new Point(472, 73);
+            btnSend.Location = new Point(366, 12);
             btnSend.Name = "btnSend";
             btnSend.Size = new Size(75, 50);
             btnSend.TabIndex = 53;
             btnSend.Text = "Send";
             btnSend.UseVisualStyleBackColor = true;
-            btnSend.Click += this.btnSend_Click;
+            btnSend.Click += btnSend_Click;
             // 
             // textBoxCommandData
             // 
-            textBoxCommandData.Location = new Point(22, 73);
+            textBoxCommandData.Location = new Point(12, 473);
             textBoxCommandData.Multiline = true;
             textBoxCommandData.Name = "textBoxCommandData";
             textBoxCommandData.Size = new Size(429, 50);
@@ -663,10 +663,11 @@
             // 
             comboBoxPort.FormattingEnabled = true;
             comboBoxPort.Items.AddRange(new object[] { "Port 1", "Port 2", "Port 3" });
-            comboBoxPort.Location = new Point(22, 26);
+            comboBoxPort.Location = new Point(12, 12);
             comboBoxPort.Name = "comboBoxPort";
             comboBoxPort.Size = new Size(121, 23);
             comboBoxPort.TabIndex = 51;
+            comboBoxPort.SelectedIndexChanged += comboBoxPort_SelectedIndexChanged;
             // 
             // OutputCommandView
             // 

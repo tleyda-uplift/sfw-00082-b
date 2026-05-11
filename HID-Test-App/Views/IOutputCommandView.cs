@@ -50,5 +50,6 @@ namespace HID_Test_App.Views
         decimal OutputDutyCycle7 { get; set; }
 
         event EventHandler SendClicked;
+        event EventHandler PortChanged;
     }
 }

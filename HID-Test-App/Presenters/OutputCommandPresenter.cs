@@ -17,6 +17,21 @@ namespace HID_Test_App.Presenters
             _hidService = hidService;
 
             _outputCommandView.OutputPort = 0;
+            ResetInputs();
+
+            _outputCommandView.SendClicked += OutputCommandView_SendClicked;
+            _outputCommandView.PortChanged += OutputCommandView_PortChanged;
+
+            outputCommandBuilder = new OutputCommandBuilder();
+        }
+
+        private void OutputCommandView_PortChanged(object? sender, EventArgs e)
+        {
+            ResetInputs();
+        }
+
+        void ResetInputs()
+        {
             _outputCommandView.ChangeEnabled0 = false;
             _outputCommandView.ChangeEnabled1 = false;
             _outputCommandView.ChangeEnabled2 = false;
@@ -42,9 +57,6 @@ namespace HID_Test_App.Presenters
             _outputCommandView.OutputDutyCycle6 = 0;
             _outputCommandView.OutputDutyCycle7 = 0;
 
-            _outputCommandView.SendClicked += OutputCommandView_SendClicked;
-
-            outputCommandBuilder = new OutputCommandBuilder();
         }
 
         private void OutputCommandView_SendClicked(object? sender, EventArgs e)
