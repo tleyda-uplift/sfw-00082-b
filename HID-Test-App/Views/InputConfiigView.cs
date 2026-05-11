@@ -61,6 +61,8 @@ namespace HID_Test_App.Views
         public int PullResistor6 { get => comboBoxResistor6.SelectedIndex; set => comboBoxResistor6.SelectedIndex = value; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int PullResistor7 { get => comboBoxResistor7.SelectedIndex; set => comboBoxResistor7.SelectedIndex = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool SendEnabled { set => btnInputConfigSend.Enabled = value; }
 
         public event EventHandler? SendClicked;
         public event EventHandler? PortChanged;

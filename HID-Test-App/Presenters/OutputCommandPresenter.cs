@@ -16,13 +16,20 @@ namespace HID_Test_App.Presenters
             _outputCommandView = outputCommandView;
             _hidService = hidService;
 
+            _outputCommandView.SendEnabled = false;
             _outputCommandView.OutputPort = 0;
             ResetInputs();
 
             _outputCommandView.SendClicked += OutputCommandView_SendClicked;
             _outputCommandView.PortChanged += OutputCommandView_PortChanged;
+            _hidService.ConnectionChanged += HidService_ConnectionChanged;
 
             outputCommandBuilder = new OutputCommandBuilder();
+        }
+
+        private void HidService_ConnectionChanged(object? sender, bool e)
+        {
+            _outputCommandView.SendEnabled = e;
         }
 
         private void OutputCommandView_PortChanged(object? sender, EventArgs e)

@@ -15,11 +15,18 @@ namespace HID_Test_App.Presenters
             _inputConfigView = inputConfigView;
             _hidService = hidService;
 
+            _inputConfigView.SendEnabled = false;
             _inputConfigView.InputPort = 0;
             ResetInputs();
 
             _inputConfigView.SendClicked += InputConfigView_SendClicked;
             _inputConfigView.PortChanged += InputConfigView_PortChanged;
+            _hidService.ConnectionChanged += HidService_ConnectionChanged;
+        }
+
+        private void HidService_ConnectionChanged(object? sender, bool e)
+        {
+            _inputConfigView.SendEnabled = e;
         }
 
         private void InputConfigView_PortChanged(object? sender, EventArgs e)

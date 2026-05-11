@@ -103,6 +103,8 @@ namespace HID_Test_App.Views
         public decimal OutputDutyCycle7 { get => numericDutyCycle7.Value; set => numericDutyCycle7.Value = value; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string CommandData { get => textBoxCommandData.Text; set => textBoxCommandData.Text = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool SendEnabled { set => btnSend.Enabled = value; }
 
         public event EventHandler? SendClicked;
         public event EventHandler? PortChanged;
