@@ -64,7 +64,7 @@ namespace HID_Test_App.Services
 
         public byte[] GetReport(byte reportId)
         {
-            Write(0x40, []);
+            //Write(0x40, []);
             if (_hidDevice != null && _hidDevice.TryOpen(out HidStream stream))
             {
                 var reportDescriptor = _hidDevice.GetReportDescriptor();

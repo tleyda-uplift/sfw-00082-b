@@ -17,6 +17,8 @@ static InputState inputStates[24];
 
 static const uint8_t MAX_INPUT_DEBOUNCE_COUNT = 5;
 
+extern uint8_t sendReportFlag;
+
 void initializeInputs(){
     int idx = 0;
 
@@ -60,7 +62,7 @@ void configureGpio(int index) {
         } else {
             GPIO_setAsInputPinWithPullDownResistor(gpioPort, pin);
         }
-    } {
+    } else {
         GPIO_setAsInputPin(gpioPort, pin);
     }
 }
@@ -146,7 +148,10 @@ __interrupt void RTC_A_ISR(void)
         case 4:         // RTCCNTIFG (Counter interrupt)
             // Handle timer interrupt
             readInputs();
+            sendReportFlag = 1;
             break;
         default: break;
     }
+    __bic_SR_register_on_exit(LPM3_bits);
+    __no_operation();
 }

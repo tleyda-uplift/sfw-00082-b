@@ -45,7 +45,7 @@ namespace HID_Test_App.Commands
             data[7] |= (byte)(inputConfigs[3].Enabled ? 0x80 : 0);
             data[7] |= GetResistorBitMask(inputConfigs[3].InputResistor);
             data[8] |= (byte)(inputConfigs[4].Enabled ? 0x80 : 0);
-            data[9] |= GetResistorBitMask(inputConfigs[4].InputResistor);
+            data[8] |= GetResistorBitMask(inputConfigs[4].InputResistor);
             data[9] |= (byte)(inputConfigs[5].Enabled ? 0x80 : 0);
             data[9] |= GetResistorBitMask(inputConfigs[5].InputResistor);
             data[10] |= (byte)(inputConfigs[6].Enabled ? 0x80 : 0);

@@ -87,6 +87,8 @@ volatile BYTE bHIDDataReceived_event = FALSE; // Indicates data has been rx'ed
 char wholeString[MAX_STR_LENGTH] = "";
 BYTE reportBuffer[MAX_STR_LENGTH];
 
+uint8_t sendReportFlag = 0;
+
 void resetReportBuffer() {
     uint8_t idx;
 
@@ -129,8 +131,10 @@ VOID main (VOID)
             case ST_ENUM_ACTIVE:
             
                 // Enter LPM0 (can't do LPM3 when active)
-                __bis_SR_register(LPM0_bits + GIE);
-                _NOP(); 
+                if (!bHIDDataReceived_event && !sendReportFlag) {
+                    __bis_SR_register(LPM0_bits + GIE);
+                    _NOP(); 
+                }
                 // Exit LPM on USB receive and perform a receive operation
                 
                 // If true, some data is in the buffer; begin receiving a cmd
@@ -165,6 +169,18 @@ VOID main (VOID)
                             wholeString[i] = 0x00;
                     }
                     bHIDDataReceived_event = FALSE;
+                }
+                if (sendReportFlag) {
+                    uint8_t idx;
+                    resetReportBuffer();
+                    getInputsReport(reportBuffer);
+
+                    for (idx = 0; idx < 10; ++idx) {
+                        if(USBHID_sendReport(reportBuffer, HID0_INTFNUM) == kUSBHID_sendComplete) {
+                            sendReportFlag = false;
+                            break;
+                        }
+                    }               
                 }
                 break;
 

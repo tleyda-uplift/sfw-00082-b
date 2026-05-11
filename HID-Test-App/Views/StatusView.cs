@@ -1,4 +1,5 @@
-﻿using HID_Test_App.Presenters;
+﻿using HID_Test_App.Models;
+using HID_Test_App.Presenters;
 using HID_Test_App.Services;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,6 @@ namespace HID_Test_App.Views
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string RawStatus { get => textBoxRawStatus.Text; set => textBoxRawStatus.Text = value; }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public object InputStatusDataSource { set => listBoxInputStatus.DataSource = value; }
 
         public StatusView()
         {
@@ -34,6 +33,11 @@ namespace HID_Test_App.Views
         private void btnRequestStatus_Click(object sender, EventArgs e)
         {
             RequestClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void SetInputStatusDataSource(BindingList<InputStatus> statusList)
+        {
+            listBoxInputStatus.DataSource = statusList;
         }
     }
 }
