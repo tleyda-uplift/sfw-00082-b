@@ -70,6 +70,7 @@ namespace HID_Test_App.Presenters
             _ledTestView.StatusText = "N/A";
             SetButtonStates();
             SetLedColors();
+            SendCurrentCommand();
         }
 
         private void LedTestView_NextClicked(object? sender, EventArgs e)
