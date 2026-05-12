@@ -123,14 +123,15 @@ void readInputs() {
             if (inputStates[idx].currentState == inputStates[idx].lastState) {
                 if (inputStates[idx].count < MAX_INPUT_DEBOUNCE_COUNT) {
                     inputStates[idx].count++;
+                    if (inputStates[idx].count == MAX_INPUT_DEBOUNCE_COUNT) {
+                        inputStates[idx].state = inputStates[idx].currentState == GPIO_INPUT_PIN_HIGH;
+                        sendReportFlag = 1;
+                    }
                 }
             } else {
                 inputStates[idx].count = 0;
             }
 
-            if (inputStates[idx].count == MAX_INPUT_DEBOUNCE_COUNT) {
-                inputStates[idx].state = inputStates[idx].currentState == GPIO_INPUT_PIN_HIGH;
-            }
             inputStates[idx].lastState = inputStates[idx].currentState;
         }
     }
@@ -148,7 +149,6 @@ __interrupt void RTC_A_ISR(void)
         case 4:         // RTCCNTIFG (Counter interrupt)
             // Handle timer interrupt
             readInputs();
-            sendReportFlag = 1;
             break;
         default: break;
     }

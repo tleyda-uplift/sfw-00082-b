@@ -150,6 +150,7 @@ VOID main (VOID)
                             setOutputs((BYTE*)(wholeString + 2));
                         } else if (wholeString[2] == 0x38) {
                             configureInputs((BYTE*)(wholeString + 2));
+                            sendReportFlag = 1;
                         }
                     }
                     else if (wholeString[0] == 0x40) {
