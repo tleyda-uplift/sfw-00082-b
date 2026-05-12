@@ -234,7 +234,7 @@ namespace HID_Test_App.Presenters
                 builder = builder.WithOutput(_testCount, true, OutputState.On, 0);
             }
             var usbData = builder.BuildLegacyCommandData();
-            _hidService.Write(0x3F, usbData);
+            _hidService.WriteConfigurationReport(usbData);
         }
     }
 }

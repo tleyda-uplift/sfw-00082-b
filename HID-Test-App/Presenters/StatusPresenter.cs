@@ -7,6 +7,12 @@ namespace HID_Test_App.Presenters
 {
     public class StatusPresenter
     {
+        private const int INPUT_ENABLE_BITMASK = 0x08;
+        private const int INPUT_RESISTOR_BITMASK = 0x04;
+        private const int INPUT_STATE_BITMASK = 0x01;
+        private const int BYTES_PER_PORT = 4;
+        private const int INPUT_NIBBLE_SHIFT = BYTES_PER_PORT;
+        private const int INPUT_NIBBLE_MASK = 0x0F;
         private readonly IStatusView _statusView;
         private readonly IHidService _hidService;
         private BindingList<InputStatus> _inputStatuses1;
@@ -26,7 +32,7 @@ namespace HID_Test_App.Presenters
             _statusView.SetInputStatusDataSource(_inputStatuses1, _inputStatuses2, _inputStatuses3);
 
             _statusTimer = new System.Windows.Forms.Timer();
-            _statusTimer.Interval = 1000;
+            _statusTimer.Interval = 500;
             _statusTimer.Tick += TimerHandler;
 
             _hidService.ConnectionChanged += HidService_ConnectionChanged;
@@ -48,7 +54,7 @@ namespace HID_Test_App.Presenters
         {
             try
             {
-                var report = _hidService.GetReport(0x40);
+                var report = _hidService.GetStatusReport();
                 if (report.Length > 0)
                 {
                     string[] statusDisplay = [.. report.Select(x => Convert.ToHexString([x]))];
@@ -68,47 +74,49 @@ namespace HID_Test_App.Presenters
 
         private void ParseStatusData(byte[] statusData)
         {
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < BYTES_PER_PORT; i++)
             {
                 int input = i * 2;
-                byte status = (byte)(statusData[i] >> 4);
-                _inputStatuses1[input].Enabled = (status & 0x08) > 0;
-                _inputStatuses1[input].Resistor = (status & 0x04) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
-                _inputStatuses1[input].State = (status & 0x01) > 0;
+                byte status = (byte)(statusData[i] >> INPUT_NIBBLE_SHIFT);
+                _inputStatuses1[input].Enabled = (status & INPUT_ENABLE_BITMASK) > 0;
+                _inputStatuses1[input].Resistor = (status & INPUT_RESISTOR_BITMASK) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
+                _inputStatuses1[input].State = (status & INPUT_STATE_BITMASK) > 0;
 
                 input++;
-                status = (byte)(statusData[i] & 0x0F);
-                _inputStatuses1[input].Enabled = (status & 0x08) > 0;
-                _inputStatuses1[input].Resistor = (status & 0x04) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
-                _inputStatuses1[input].State = (status & 0x01) > 0;
+                status = (byte)(statusData[i] & INPUT_NIBBLE_MASK);
+                _inputStatuses1[input].Enabled = (status & INPUT_ENABLE_BITMASK) > 0;
+                _inputStatuses1[input].Resistor = (status & INPUT_RESISTOR_BITMASK) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
+                _inputStatuses1[input].State = (status & INPUT_STATE_BITMASK) > 0;
             }
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < BYTES_PER_PORT; i++)
             {
                 int input = i * 2;
-                byte status = (byte)(statusData[i + 4] >> 4);
-                _inputStatuses2[input].Enabled = (status & 0x08) > 0;
-                _inputStatuses2[input].Resistor = (status & 0x04) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
-                _inputStatuses2[input].State = (status & 0x01) > 0;
+                int portOffset = BYTES_PER_PORT;
+                byte status = (byte)(statusData[i + portOffset] >> INPUT_NIBBLE_SHIFT);
+                _inputStatuses2[input].Enabled = (status & INPUT_ENABLE_BITMASK) > 0;
+                _inputStatuses2[input].Resistor = (status & INPUT_RESISTOR_BITMASK) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
+                _inputStatuses2[input].State = (status & INPUT_STATE_BITMASK) > 0;
 
                 input++;
-                status = (byte)(statusData[i + 4] & 0x0F);
-                _inputStatuses2[input].Enabled = (status & 0x08) > 0;
-                _inputStatuses2[input].Resistor = (status & 0x04) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
-                _inputStatuses2[input].State = (status & 0x01) > 0;
+                status = (byte)(statusData[i + portOffset] & INPUT_NIBBLE_MASK);
+                _inputStatuses2[input].Enabled = (status & INPUT_ENABLE_BITMASK) > 0;
+                _inputStatuses2[input].Resistor = (status & INPUT_RESISTOR_BITMASK) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
+                _inputStatuses2[input].State = (status & INPUT_STATE_BITMASK) > 0;
             }
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < BYTES_PER_PORT; i++)
             {
                 int input = i * 2;
-                byte status = (byte)(statusData[i + 8] >> 4);
-                _inputStatuses3[input].Enabled = (status & 0x08) > 0;
-                _inputStatuses3[input].Resistor = (status & 0x04) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
-                _inputStatuses3[input].State = (status & 0x01) > 0;
+                int portOffset = BYTES_PER_PORT * 2;
+                byte status = (byte)(statusData[i + portOffset] >> INPUT_NIBBLE_SHIFT);
+                _inputStatuses3[input].Enabled = (status & INPUT_ENABLE_BITMASK) > 0;
+                _inputStatuses3[input].Resistor = (status & INPUT_RESISTOR_BITMASK) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
+                _inputStatuses3[input].State = (status & INPUT_STATE_BITMASK) > 0;
 
                 input++;
-                status = (byte)(statusData[i + 8] & 0x0F);
-                _inputStatuses3[input].Enabled = (status & 0x08) > 0;
-                _inputStatuses3[input].Resistor = (status & 0x04) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
-                _inputStatuses3[input].State = (status & 0x01) > 0;
+                status = (byte)(statusData[i + portOffset] & INPUT_NIBBLE_MASK);
+                _inputStatuses3[input].Enabled = (status & INPUT_ENABLE_BITMASK) > 0;
+                _inputStatuses3[input].Resistor = (status & INPUT_RESISTOR_BITMASK) > 0 ? InputResistor.PullUp : InputResistor.PullDown;
+                _inputStatuses3[input].State = (status & INPUT_STATE_BITMASK) > 0;
             }
         }
     }

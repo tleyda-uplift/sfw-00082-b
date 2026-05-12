@@ -70,7 +70,7 @@ namespace HID_Test_App.Presenters
                 .WithInput(7, _inputConfigView.InputEnable7, (InputResistor)_inputConfigView.PullResistor7)
                 .BuildConfigData();
 
-            _hidService.Write(0x3F, usbData);
+            _hidService.WriteConfigurationReport(usbData);
         }
     }
 }

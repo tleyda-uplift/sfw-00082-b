@@ -10,8 +10,12 @@ namespace HID_Test_App.Services
 
         bool Connect(int vendorId, int productId);
         void Disconnect();
+
         void Write(byte reportId, byte[] data);
+        void WriteConfigurationReport(byte[] data);
+
         byte[] GetReport(byte reportId);
+        byte[] GetStatusReport();
 
         event EventHandler<bool> ConnectionChanged;
     }
@@ -23,6 +27,10 @@ namespace HID_Test_App.Services
         public event EventHandler<bool>? ConnectionChanged;
 
         public bool Connected => _hidDevice != null;
+
+        const byte ConfigurationReportId = 0x3F;
+
+        const byte StatusReportId = 0x40;
 
         public bool Connect(int vendorId, int productId)
         {
@@ -64,7 +72,6 @@ namespace HID_Test_App.Services
 
         public byte[] GetReport(byte reportId)
         {
-            //Write(0x40, []);
             if (_hidDevice != null && _hidDevice.TryOpen(out HidStream stream))
             {
                 var reportDescriptor = _hidDevice.GetReportDescriptor();
@@ -78,6 +85,16 @@ namespace HID_Test_App.Services
                 }
              }
             return [];
+        }
+
+        public void WriteConfigurationReport(byte[] data)
+        {
+            Write(ConfigurationReportId, data);
+        }
+
+        public byte[] GetStatusReport()
+        {
+            return GetReport(StatusReportId);
         }
     }
 }

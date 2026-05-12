@@ -83,7 +83,7 @@ namespace HID_Test_App.Presenters
             string[] commandDisplay = [.. usbData.Select(x => Convert.ToHexString([x]))];
             _outputCommandView.CommandData = string.Join(',', commandDisplay);
 
-            _hidService.Write(0x3F, usbData);
+            _hidService.WriteConfigurationReport(usbData);
         }
 
         private static OutputState GetOutputState(bool outputOn, bool outputPwm)
