@@ -34,7 +34,7 @@
             textBoxProductId = new TextBox();
             btnConnect = new Button();
             btnDisconnect = new Button();
-            tabsStatusCommand = new TabControl();
+            tabControlApp = new TabControl();
             tabPageLedTest = new TabPage();
             ledTestView = new LedTestView();
             tabPageCommand = new TabPage();
@@ -43,7 +43,7 @@
             inputConfiigView = new InputConfiigView();
             tabPageStatus = new TabPage();
             statusView = new StatusView();
-            tabsStatusCommand.SuspendLayout();
+            tabControlApp.SuspendLayout();
             tabPageLedTest.SuspendLayout();
             tabPageCommand.SuspendLayout();
             tabPageInputConfig.SuspendLayout();
@@ -102,18 +102,18 @@
             btnDisconnect.UseVisualStyleBackColor = true;
             btnDisconnect.Click += btnDisconnect_Click;
             // 
-            // tabsStatusCommand
+            // tabControlApp
             // 
-            tabsStatusCommand.Controls.Add(tabPageLedTest);
-            tabsStatusCommand.Controls.Add(tabPageCommand);
-            tabsStatusCommand.Controls.Add(tabPageInputConfig);
-            tabsStatusCommand.Controls.Add(tabPageStatus);
-            tabsStatusCommand.Location = new Point(10, 50);
-            tabsStatusCommand.Name = "tabsStatusCommand";
-            tabsStatusCommand.Padding = new Point(16, 16);
-            tabsStatusCommand.SelectedIndex = 0;
-            tabsStatusCommand.Size = new Size(581, 604);
-            tabsStatusCommand.TabIndex = 6;
+            tabControlApp.Controls.Add(tabPageLedTest);
+            tabControlApp.Controls.Add(tabPageCommand);
+            tabControlApp.Controls.Add(tabPageInputConfig);
+            tabControlApp.Controls.Add(tabPageStatus);
+            tabControlApp.Location = new Point(10, 50);
+            tabControlApp.Name = "tabControlApp";
+            tabControlApp.Padding = new Point(16, 16);
+            tabControlApp.SelectedIndex = 0;
+            tabControlApp.Size = new Size(581, 604);
+            tabControlApp.TabIndex = 6;
             // 
             // tabPageLedTest
             // 
@@ -198,7 +198,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(603, 666);
-            Controls.Add(tabsStatusCommand);
+            Controls.Add(tabControlApp);
             Controls.Add(btnDisconnect);
             Controls.Add(btnConnect);
             Controls.Add(textBoxProductId);
@@ -207,7 +207,7 @@
             Controls.Add(label1);
             Name = "MainForm";
             Text = "HID Test App";
-            tabsStatusCommand.ResumeLayout(false);
+            tabControlApp.ResumeLayout(false);
             tabPageLedTest.ResumeLayout(false);
             tabPageCommand.ResumeLayout(false);
             tabPageInputConfig.ResumeLayout(false);
@@ -224,7 +224,7 @@
         private TextBox textBoxProductId;
         private Button btnConnect;
         private Button btnDisconnect;
-        private TabControl tabsStatusCommand;
+        private TabControl tabControlApp;
         private TabPage tabPageStatus;
         public TabPage tabPageCommand;
         private OutputCommandView outputCommandView;

@@ -27,6 +27,14 @@ namespace HID_Test_App.Views
             inputConfiigView.Initialize(hidService);
             statusView.Initialize(hidService);
             ledTestView.Initialize(hidService);
+
+            tabControlApp.SelectedIndexChanged += TabControlApp_SelectedIndexChanged;
+        }
+
+        private void TabControlApp_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            TabPage currentTab = tabControlApp.SelectedTab;
+            statusView.StatusTabSelected = currentTab.Controls[0] is IStatusView activeView;
         }
 
         public event EventHandler? ConnectClicked;

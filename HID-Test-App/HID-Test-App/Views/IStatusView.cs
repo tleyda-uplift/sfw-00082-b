@@ -9,6 +9,7 @@ namespace HID_Test_App.Views
     public interface IStatusView
     {
         string RawStatus { get; set; }
+        bool StatusTabSelected { set; }
 
         void SetInputStatusDataSource(
             BindingList<InputStatus> statusList1,

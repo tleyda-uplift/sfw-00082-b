@@ -19,6 +19,8 @@ namespace HID_Test_App.Presenters
         private BindingList<InputStatus> _inputStatuses2;
         private BindingList<InputStatus> _inputStatuses3;
         private System.Windows.Forms.Timer _statusTimer;
+        private bool _statusTabActive;
+        private bool _connected;
 
         public StatusPresenter(IStatusView statusView, IHidService hidService)
         {
@@ -29,18 +31,30 @@ namespace HID_Test_App.Presenters
             _inputStatuses2 = [..Enumerable.Range(0, 8).Select(idx => new InputStatus(2, (idx % 8) + 1))];
             _inputStatuses3 = [..Enumerable.Range(0, 8).Select(idx => new InputStatus(3, (idx % 8) + 1))];
 
+            _statusTabActive = false;
+            _connected = false;
+
             _statusView.SetInputStatusDataSource(_inputStatuses1, _inputStatuses2, _inputStatuses3);
 
             _statusTimer = new System.Windows.Forms.Timer();
-            _statusTimer.Interval = 500;
+            _statusTimer.Interval = 750;
             _statusTimer.Tick += TimerHandler;
 
             _hidService.ConnectionChanged += HidService_ConnectionChanged;
         }
 
-        private void HidService_ConnectionChanged(object? sender, bool connected)
+        public bool StatusTabActive 
+        { 
+            set
+            {
+                _statusTabActive = value;
+                HandleTimerState();
+            }
+        }
+
+        private void HandleTimerState()
         {
-            if (connected)
+            if (_connected && _statusTabActive)
             {
                 _statusTimer.Start();
             }
@@ -48,6 +62,12 @@ namespace HID_Test_App.Presenters
             {
                 _statusTimer.Stop();
             }
+        }
+
+        private void HidService_ConnectionChanged(object? sender, bool connected)
+        {
+            _connected = connected;
+            HandleTimerState();
         }
 
         private void TimerHandler(object? sender, EventArgs e)
