@@ -9,10 +9,22 @@ namespace Hid_Test_App_Tests.Fakes
     public class FakeHidService : IHidService
     {
         bool _connected = false;
+        byte[] _writeReportData;
+        byte _writeReportId;
+        byte _configurationReportId = 0x3F;
+
+        public FakeHidService() 
+        {
+            _writeReportData = [];
+        }
+
+        public byte[] WriteReportData { get => _writeReportData; }
+        public byte WriteReportId { get => _writeReportId; }
+        public byte ConfigurationReportId { get => _configurationReportId; set => _configurationReportId = value;  }
 
         public bool Connected => _connected;
 
-        public event EventHandler<bool> ConnectionChanged;
+        public event EventHandler<bool>? ConnectionChanged;
 
         public bool Connect(int vendorId, int productId)
         {
@@ -39,12 +51,14 @@ namespace Hid_Test_App_Tests.Fakes
 
         public void Write(byte reportId, byte[] data)
         {
-            
+            _writeReportId = reportId;
+            _writeReportData = new byte[data.Length];
+            data.CopyTo(_writeReportData);
         }
 
         public void WriteConfigurationReport(byte[] data)
         {
-            
+            Write(_configurationReportId, data);
         }
     }
 }
