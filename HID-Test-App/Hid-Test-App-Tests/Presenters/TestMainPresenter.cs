@@ -36,14 +36,50 @@ namespace Hid_Test_App_Tests.Presenters
 
     public class TestMainPresenter
     {
+        private TestMainForm _mainForm;
+        private FakeHidService _hidService;
+        private MainPresenter _presenter;
+
+        public TestMainPresenter()
+        {
+            _mainForm = new TestMainForm();
+            _hidService = new FakeHidService();
+            _presenter = new MainPresenter(_mainForm, _hidService);
+        }
+
         [Fact]
         public void MainPresenter_DefaultsVendorAndProductIds()
         {
-            var form = new TestMainForm();
-            var presenter = new MainPresenter(form, new FakeHidService());
+            _mainForm.VendorId.Should().Be("2047");
+            _mainForm.ProductId.Should().Be("3737");
+        }
 
-            form.VendorId.Should().Be("2047");
-            form.ProductId.Should().Be("3737");
+        [Fact]
+        public void MainPresenter_CorrectlyDefaultsButtonStates()
+        {
+            _mainForm.ConnectEnabled.Should().BeTrue();
+            _mainForm.DisconnectEnabled.Should().BeFalse();
+        }
+
+        [Fact]
+        public void MainPresenter_ConnectsToDevice()
+        {
+            _mainForm.ClickConnect();
+
+            _hidService.Connected.Should().BeTrue();
+            _mainForm.ConnectEnabled.Should().BeFalse();
+            _mainForm.DisconnectEnabled.Should().BeTrue();
+        }
+
+        [Fact]
+        public void MainPresenter_DisConnectsFromDevice()
+        {
+            _mainForm.ClickConnect();
+            _mainForm.ClickDisconnect();
+
+            _hidService.Connected.Should().BeFalse();
+            _mainForm.ConnectEnabled.Should().BeTrue();
+            _mainForm.DisconnectEnabled.Should().BeFalse();
         }
     }
 }

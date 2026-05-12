@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HID-Test-App\HID-Test-App\HID-Test-App.csproj" />
+    <ProjectReference Include="..\HID-Test-App\HID-Test-App.csproj" />
   </ItemGroup>
 
   <ItemGroup>
