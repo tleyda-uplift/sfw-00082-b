@@ -53,40 +53,45 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(205, 24);
+            label1.Location = new Point(293, 40);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(25, 15);
+            label1.Size = new Size(41, 25);
             label1.TabIndex = 0;
             label1.Text = "VID";
             // 
             // texboxVendorId
             // 
-            texboxVendorId.Location = new Point(242, 21);
+            texboxVendorId.Location = new Point(346, 35);
+            texboxVendorId.Margin = new Padding(4, 5, 4, 5);
             texboxVendorId.Name = "texboxVendorId";
-            texboxVendorId.Size = new Size(54, 23);
+            texboxVendorId.Size = new Size(75, 31);
             texboxVendorId.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(312, 24);
+            label2.Location = new Point(446, 40);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(25, 15);
+            label2.Size = new Size(40, 25);
             label2.TabIndex = 2;
             label2.Text = "PID";
             // 
             // textBoxProductId
             // 
-            textBoxProductId.Location = new Point(343, 21);
+            textBoxProductId.Location = new Point(490, 35);
+            textBoxProductId.Margin = new Padding(4, 5, 4, 5);
             textBoxProductId.Name = "textBoxProductId";
-            textBoxProductId.Size = new Size(59, 23);
+            textBoxProductId.Size = new Size(83, 31);
             textBoxProductId.TabIndex = 3;
             // 
             // btnConnect
             // 
-            btnConnect.Location = new Point(431, 21);
+            btnConnect.Location = new Point(616, 35);
+            btnConnect.Margin = new Padding(4, 5, 4, 5);
             btnConnect.Name = "btnConnect";
-            btnConnect.Size = new Size(75, 23);
+            btnConnect.Size = new Size(107, 38);
             btnConnect.TabIndex = 4;
             btnConnect.Text = "Connect";
             btnConnect.UseVisualStyleBackColor = true;
@@ -94,9 +99,10 @@
             // 
             // btnDisconnect
             // 
-            btnDisconnect.Location = new Point(512, 21);
+            btnDisconnect.Location = new Point(731, 35);
+            btnDisconnect.Margin = new Padding(4, 5, 4, 5);
             btnDisconnect.Name = "btnDisconnect";
-            btnDisconnect.Size = new Size(75, 23);
+            btnDisconnect.Size = new Size(107, 38);
             btnDisconnect.TabIndex = 5;
             btnDisconnect.Text = "Disconnect";
             btnDisconnect.UseVisualStyleBackColor = true;
@@ -108,96 +114,99 @@
             tabControlApp.Controls.Add(tabPageCommand);
             tabControlApp.Controls.Add(tabPageInputConfig);
             tabControlApp.Controls.Add(tabPageStatus);
-            tabControlApp.Location = new Point(10, 50);
+            tabControlApp.Location = new Point(14, 83);
+            tabControlApp.Margin = new Padding(4, 5, 4, 5);
             tabControlApp.Name = "tabControlApp";
             tabControlApp.Padding = new Point(16, 16);
             tabControlApp.SelectedIndex = 0;
-            tabControlApp.Size = new Size(581, 604);
+            tabControlApp.Size = new Size(830, 1007);
             tabControlApp.TabIndex = 6;
             // 
             // tabPageLedTest
             // 
             tabPageLedTest.Controls.Add(ledTestView);
-            tabPageLedTest.Location = new Point(4, 50);
-            tabPageLedTest.Margin = new Padding(2);
+            tabPageLedTest.Location = new Point(4, 60);
             tabPageLedTest.Name = "tabPageLedTest";
-            tabPageLedTest.Padding = new Padding(2);
-            tabPageLedTest.Size = new Size(573, 550);
+            tabPageLedTest.Padding = new Padding(3, 3, 3, 3);
+            tabPageLedTest.Size = new Size(822, 943);
             tabPageLedTest.TabIndex = 3;
             tabPageLedTest.Text = "LED Test";
             tabPageLedTest.UseVisualStyleBackColor = true;
             // 
             // ledTestView
             // 
-            ledTestView.Location = new Point(11, 7);
-            ledTestView.Margin = new Padding(1);
+            ledTestView.Location = new Point(16, 12);
+            ledTestView.Margin = new Padding(1, 2, 1, 2);
             ledTestView.Name = "ledTestView";
-            ledTestView.Size = new Size(560, 539);
+            ledTestView.Size = new Size(800, 898);
             ledTestView.TabIndex = 0;
             // 
             // tabPageCommand
             // 
             tabPageCommand.Controls.Add(outputCommandView);
-            tabPageCommand.Location = new Point(4, 50);
+            tabPageCommand.Location = new Point(4, 60);
+            tabPageCommand.Margin = new Padding(4, 5, 4, 5);
             tabPageCommand.Name = "tabPageCommand";
-            tabPageCommand.Padding = new Padding(3);
-            tabPageCommand.Size = new Size(573, 550);
+            tabPageCommand.Padding = new Padding(4, 5, 4, 5);
+            tabPageCommand.Size = new Size(822, 943);
             tabPageCommand.TabIndex = 1;
             tabPageCommand.Text = "Outputs Command";
             tabPageCommand.UseVisualStyleBackColor = true;
             // 
             // outputCommandView
             // 
-            outputCommandView.Location = new Point(7, 3);
-            outputCommandView.Margin = new Padding(4, 5, 4, 5);
+            outputCommandView.Location = new Point(10, 5);
+            outputCommandView.Margin = new Padding(6, 8, 6, 8);
             outputCommandView.Name = "outputCommandView";
-            outputCommandView.Size = new Size(560, 540);
+            outputCommandView.Size = new Size(800, 900);
             outputCommandView.TabIndex = 0;
             // 
             // tabPageInputConfig
             // 
             tabPageInputConfig.Controls.Add(inputConfiigView);
-            tabPageInputConfig.Location = new Point(4, 50);
+            tabPageInputConfig.Location = new Point(4, 60);
+            tabPageInputConfig.Margin = new Padding(4, 5, 4, 5);
             tabPageInputConfig.Name = "tabPageInputConfig";
-            tabPageInputConfig.Padding = new Padding(3);
-            tabPageInputConfig.Size = new Size(573, 550);
+            tabPageInputConfig.Padding = new Padding(4, 5, 4, 5);
+            tabPageInputConfig.Size = new Size(822, 943);
             tabPageInputConfig.TabIndex = 2;
             tabPageInputConfig.Text = "Input Config";
             tabPageInputConfig.UseVisualStyleBackColor = true;
             // 
             // inputConfiigView
             // 
-            inputConfiigView.Location = new Point(9, 7);
-            inputConfiigView.Margin = new Padding(4, 5, 4, 5);
+            inputConfiigView.Location = new Point(13, 12);
+            inputConfiigView.Margin = new Padding(6, 8, 6, 8);
             inputConfiigView.Name = "inputConfiigView";
-            inputConfiigView.Size = new Size(455, 532);
+            inputConfiigView.Size = new Size(799, 918);
             inputConfiigView.TabIndex = 0;
             // 
             // tabPageStatus
             // 
             tabPageStatus.Controls.Add(statusView);
-            tabPageStatus.Location = new Point(4, 50);
+            tabPageStatus.Location = new Point(4, 60);
+            tabPageStatus.Margin = new Padding(4, 5, 4, 5);
             tabPageStatus.Name = "tabPageStatus";
-            tabPageStatus.Padding = new Padding(3);
-            tabPageStatus.Size = new Size(573, 550);
+            tabPageStatus.Padding = new Padding(4, 5, 4, 5);
+            tabPageStatus.Size = new Size(822, 943);
             tabPageStatus.TabIndex = 0;
             tabPageStatus.Text = "Status";
             tabPageStatus.UseVisualStyleBackColor = true;
             // 
             // statusView
             // 
-            statusView.Location = new Point(12, 11);
-            statusView.Margin = new Padding(1);
+            statusView.Location = new Point(17, 18);
+            statusView.Margin = new Padding(1, 2, 1, 2);
             statusView.Name = "statusView";
-            statusView.Size = new Size(557, 480);
+            statusView.Size = new Size(796, 800);
             statusView.TabIndex = 0;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
-            ClientSize = new Size(603, 666);
+            ClientSize = new Size(861, 1110);
             Controls.Add(tabControlApp);
             Controls.Add(btnDisconnect);
             Controls.Add(btnConnect);
@@ -205,6 +214,7 @@
             Controls.Add(label2);
             Controls.Add(texboxVendorId);
             Controls.Add(label1);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "MainForm";
             Text = "HID Test App";
             tabControlApp.ResumeLayout(false);

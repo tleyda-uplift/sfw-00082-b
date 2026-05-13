@@ -27,6 +27,11 @@ namespace HID_Test_App.Views
             PortChanged?.Invoke(this, e);
         }
 
+        private void InputConfiigView_Load(object sender, EventArgs e)
+        {
+
+        }
+
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int InputPort { get => comboBoxInputPort.SelectedIndex; set => comboBoxInputPort.SelectedIndex = value; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -63,6 +68,8 @@ namespace HID_Test_App.Views
         public int PullResistor7 { get => comboBoxResistor7.SelectedIndex; set => comboBoxResistor7.SelectedIndex = value; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool SendEnabled { get => btnInputConfigSend.Enabled; set => btnInputConfigSend.Enabled = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string ConfigData { get => textBoxInputConfigRaw.Text; set => textBoxInputConfigRaw.Text = value; }
 
         public event EventHandler? SendClicked;
         public event EventHandler? PortChanged;

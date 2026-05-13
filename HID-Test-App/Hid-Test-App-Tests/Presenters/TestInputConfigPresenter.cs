@@ -16,6 +16,7 @@ namespace Hid_Test_App_Tests.Presenters
         bool[] _inputEnable;
         int[] _inputResistor;
         bool _sendEnabled;
+        string _rawData;
 
         public TestView()
         {
@@ -23,6 +24,7 @@ namespace Hid_Test_App_Tests.Presenters
             _inputEnable = [.. Enumerable.Range(0, 8).Select(_ => false)];
             _inputResistor = [.. Enumerable.Range(0, 8).Select(_ => 0)];
             _sendEnabled = false;
+            _rawData = "";
         }
 
         public int InputPort { get => _port; set => _port = value; }
@@ -43,6 +45,7 @@ namespace Hid_Test_App_Tests.Presenters
         public int PullResistor6 { get => _inputResistor[6]; set => _inputResistor[6] = value; }
         public int PullResistor7 { get => _inputResistor[7]; set => _inputResistor[7] = value; }
         public bool SendEnabled { get => _sendEnabled; set => _sendEnabled = value; }
+        public string ConfigData { get => _rawData; set => _rawData = value; }
 
         public event EventHandler? SendClicked;
         public event EventHandler? PortChanged;
@@ -153,6 +156,32 @@ namespace Hid_Test_App_Tests.Presenters
 
             _hidService.WriteReportId.Should().Be(_hidService.ConfigurationReportId);
             _hidService.WriteReportData.Should().BeEqualTo(expectedData);
+        }
+
+        [Fact]
+        public void InputConfigPresenter_UpdatesRawUsbDataOnSend()
+        {
+            _testView.InputPort = 1;
+            _testView.InputEnable0 = true;
+            _testView.InputEnable4 = true;
+            _testView.InputEnable6 = true;
+            _testView.InputEnable7 = true;
+            _testView.PullResistor4 = 1;
+            _testView.PullResistor6 = 1;
+
+            _hidService.Connect(0, 0);
+            _testView.ClickSend();
+
+            var usbData = new InputConfigBuilder()
+                .WithPort(1)
+                .WithInput(0, true, InputResistor.PullDown)
+                .WithInput(4, true, InputResistor.PullUp)
+                .WithInput(6, true, InputResistor.PullUp)
+                .WithInput(7, true, InputResistor.PullDown)
+                .BuildConfigData();
+            var expectedText = string.Join(",", [.. usbData.Select(x => Convert.ToHexString([x]))]);
+
+            _testView.ConfigData.Should().Be(expectedText);
         }
     }
 }

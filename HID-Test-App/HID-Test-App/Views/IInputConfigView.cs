@@ -26,6 +26,8 @@ namespace HID_Test_App.Views
 
         bool SendEnabled { get; set; }
 
+        string ConfigData { get; set; }
+
         event EventHandler SendClicked;
         event EventHandler PortChanged;
     }

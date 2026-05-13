@@ -70,6 +70,9 @@ namespace HID_Test_App.Presenters
                 .WithInput(7, _inputConfigView.InputEnable7, (InputResistor)_inputConfigView.PullResistor7)
                 .BuildConfigData();
 
+            string[] commandDisplay = [.. usbData.Select(x => Convert.ToHexString([x]))];
+            _inputConfigView.ConfigData = string.Join(',', commandDisplay);
+
             _hidService.WriteConfigurationReport(usbData);
         }
     }
