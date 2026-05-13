@@ -82,6 +82,7 @@ namespace HID_Test_App.Presenters
             else
             {
                 _testCount++;
+                _testCount %= 9;
             }
             _testState = TestState.Manual;
             _ledTestView.StatusText = TestDisplay[_testCount];
@@ -92,7 +93,14 @@ namespace HID_Test_App.Presenters
 
         private void LedTestView_PrevClicked(object? sender, EventArgs e)
         {
-            _testCount--;
+            if (_testState == TestState.Reset)
+            {
+                _testCount = 8;
+            }
+            else
+            {
+                _testCount = _testCount > 0 ? _testCount - 1 : 8;
+            }
             _testState = TestState.Manual;
             _ledTestView.StatusText = TestDisplay[_testCount];
             SetButtonStates();
@@ -109,15 +117,15 @@ namespace HID_Test_App.Presenters
                     case TestState.Reset:
                         _ledTestView.RunPauseText = "Run";
                         _ledTestView.RunPauseEnabled = true;
-                        _ledTestView.PrevEnabled = false;
+                        _ledTestView.PrevEnabled = true;
                         _ledTestView.NextEnabled = true;
                         _ledTestView.ResetEnabled = false;
                         break;
                     case TestState.Manual:
                         _ledTestView.RunPauseText = "Run";
                         _ledTestView.RunPauseEnabled = true;
-                        _ledTestView.PrevEnabled = _testCount > 0;
-                        _ledTestView.NextEnabled = _testCount < 8;
+                        _ledTestView.PrevEnabled = true;
+                        _ledTestView.NextEnabled = true;
                         _ledTestView.ResetEnabled = true;
                         break;
                     case TestState.Running:
