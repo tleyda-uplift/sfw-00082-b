@@ -55,6 +55,7 @@
             comboBoxResistor7 = new ComboBox();
             checkBoxInputEnable7 = new CheckBox();
             textBoxInputConfigRaw = new TextBox();
+            groupBox9 = new GroupBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -63,13 +64,14 @@
             groupBox6.SuspendLayout();
             groupBox7.SuspendLayout();
             groupBox8.SuspendLayout();
+            groupBox9.SuspendLayout();
             SuspendLayout();
             // 
             // comboBoxInputPort
             // 
             comboBoxInputPort.FormattingEnabled = true;
             comboBoxInputPort.Items.AddRange(new object[] { "Port 1", "Port 2", "Port 3" });
-            comboBoxInputPort.Location = new Point(23, 28);
+            comboBoxInputPort.Location = new Point(20, 20);
             comboBoxInputPort.Margin = new Padding(4, 5, 4, 5);
             comboBoxInputPort.Name = "comboBoxInputPort";
             comboBoxInputPort.Size = new Size(171, 33);
@@ -78,10 +80,10 @@
             // 
             // btnInputConfigSend
             // 
-            btnInputConfigSend.Location = new Point(686, 28);
+            btnInputConfigSend.Location = new Point(670, 20);
             btnInputConfigSend.Margin = new Padding(4, 5, 4, 5);
             btnInputConfigSend.Name = "btnInputConfigSend";
-            btnInputConfigSend.Size = new Size(107, 88);
+            btnInputConfigSend.Size = new Size(100, 80);
             btnInputConfigSend.TabIndex = 1;
             btnInputConfigSend.Text = "Send";
             btnInputConfigSend.UseVisualStyleBackColor = true;
@@ -102,7 +104,7 @@
             // 
             groupBox1.Controls.Add(comboBoxResistor0);
             groupBox1.Controls.Add(checkBoxInputEnable0);
-            groupBox1.Location = new Point(23, 102);
+            groupBox1.Location = new Point(20, 74);
             groupBox1.Margin = new Padding(4, 5, 4, 5);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(4, 5, 4, 5);
@@ -125,7 +127,7 @@
             // 
             groupBox2.Controls.Add(comboBoxResistor1);
             groupBox2.Controls.Add(checkBoxInputEnable1);
-            groupBox2.Location = new Point(23, 199);
+            groupBox2.Location = new Point(20, 171);
             groupBox2.Margin = new Padding(4, 5, 4, 5);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(4, 5, 4, 5);
@@ -159,7 +161,7 @@
             // 
             groupBox3.Controls.Add(comboBoxResistor2);
             groupBox3.Controls.Add(checkBoxInputEnable2);
-            groupBox3.Location = new Point(23, 280);
+            groupBox3.Location = new Point(20, 252);
             groupBox3.Margin = new Padding(4, 5, 4, 5);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(4, 5, 4, 5);
@@ -193,7 +195,7 @@
             // 
             groupBox4.Controls.Add(comboBoxResistor3);
             groupBox4.Controls.Add(checkBoxInputEnable3);
-            groupBox4.Location = new Point(23, 361);
+            groupBox4.Location = new Point(20, 333);
             groupBox4.Margin = new Padding(4, 5, 4, 5);
             groupBox4.Name = "groupBox4";
             groupBox4.Padding = new Padding(4, 5, 4, 5);
@@ -227,7 +229,7 @@
             // 
             groupBox5.Controls.Add(comboBoxResistor4);
             groupBox5.Controls.Add(checkBoxInputEnable4);
-            groupBox5.Location = new Point(23, 443);
+            groupBox5.Location = new Point(20, 415);
             groupBox5.Margin = new Padding(4, 5, 4, 5);
             groupBox5.Name = "groupBox5";
             groupBox5.Padding = new Padding(4, 5, 4, 5);
@@ -261,7 +263,7 @@
             // 
             groupBox6.Controls.Add(comboBoxResistor5);
             groupBox6.Controls.Add(checkBoxInputEnable5);
-            groupBox6.Location = new Point(23, 525);
+            groupBox6.Location = new Point(20, 497);
             groupBox6.Margin = new Padding(4, 5, 4, 5);
             groupBox6.Name = "groupBox6";
             groupBox6.Padding = new Padding(4, 5, 4, 5);
@@ -295,7 +297,7 @@
             // 
             groupBox7.Controls.Add(comboBoxResistor6);
             groupBox7.Controls.Add(checkBoxInputEnable6);
-            groupBox7.Location = new Point(23, 606);
+            groupBox7.Location = new Point(20, 578);
             groupBox7.Margin = new Padding(4, 5, 4, 5);
             groupBox7.Name = "groupBox7";
             groupBox7.Padding = new Padding(4, 5, 4, 5);
@@ -329,7 +331,7 @@
             // 
             groupBox8.Controls.Add(comboBoxResistor7);
             groupBox8.Controls.Add(checkBoxInputEnable7);
-            groupBox8.Location = new Point(23, 693);
+            groupBox8.Location = new Point(20, 665);
             groupBox8.Margin = new Padding(4, 5, 4, 5);
             groupBox8.Name = "groupBox8";
             groupBox8.Padding = new Padding(4, 5, 4, 5);
@@ -361,17 +363,28 @@
             // 
             // textBoxInputConfigRaw
             // 
-            textBoxInputConfigRaw.Location = new Point(23, 788);
+            textBoxInputConfigRaw.Location = new Point(9, 30);
             textBoxInputConfigRaw.Multiline = true;
             textBoxInputConfigRaw.Name = "textBoxInputConfigRaw";
-            textBoxInputConfigRaw.Size = new Size(770, 93);
+            textBoxInputConfigRaw.Size = new Size(738, 93);
             textBoxInputConfigRaw.TabIndex = 11;
+            // 
+            // groupBox9
+            // 
+            groupBox9.Controls.Add(textBoxInputConfigRaw);
+            groupBox9.Font = new Font("Segoe UI", 8F);
+            groupBox9.Location = new Point(20, 781);
+            groupBox9.Name = "groupBox9";
+            groupBox9.Size = new Size(750, 138);
+            groupBox9.TabIndex = 12;
+            groupBox9.TabStop = false;
+            groupBox9.Text = "Input Config Message Data";
             // 
             // InputConfiigView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(textBoxInputConfigRaw);
+            Controls.Add(groupBox9);
             Controls.Add(groupBox8);
             Controls.Add(groupBox7);
             Controls.Add(groupBox3);
@@ -384,7 +397,7 @@
             Controls.Add(comboBoxInputPort);
             Margin = new Padding(4, 5, 4, 5);
             Name = "InputConfiigView";
-            Size = new Size(820, 900);
+            Size = new Size(800, 920);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -401,8 +414,9 @@
             groupBox7.PerformLayout();
             groupBox8.ResumeLayout(false);
             groupBox8.PerformLayout();
+            groupBox9.ResumeLayout(false);
+            groupBox9.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -434,5 +448,6 @@
         private ComboBox comboBoxResistor7;
         private CheckBox checkBoxInputEnable7;
         private TextBox textBoxInputConfigRaw;
+        private GroupBox groupBox9;
     }
 }

@@ -88,10 +88,10 @@
             // 
             // btnConnect
             // 
-            btnConnect.Location = new Point(616, 35);
+            btnConnect.Location = new Point(616, 14);
             btnConnect.Margin = new Padding(4, 5, 4, 5);
             btnConnect.Name = "btnConnect";
-            btnConnect.Size = new Size(107, 38);
+            btnConnect.Size = new Size(107, 59);
             btnConnect.TabIndex = 4;
             btnConnect.Text = "Connect";
             btnConnect.UseVisualStyleBackColor = true;
@@ -99,10 +99,10 @@
             // 
             // btnDisconnect
             // 
-            btnDisconnect.Location = new Point(731, 35);
+            btnDisconnect.Location = new Point(731, 14);
             btnDisconnect.Margin = new Padding(4, 5, 4, 5);
             btnDisconnect.Name = "btnDisconnect";
-            btnDisconnect.Size = new Size(107, 38);
+            btnDisconnect.Size = new Size(107, 59);
             btnDisconnect.TabIndex = 5;
             btnDisconnect.Text = "Disconnect";
             btnDisconnect.UseVisualStyleBackColor = true;
@@ -124,14 +124,14 @@
             // 
             // tabPageLedTest
             // 
+            tabPageLedTest.BackColor = SystemColors.Control;
             tabPageLedTest.Controls.Add(ledTestView);
             tabPageLedTest.Location = new Point(4, 60);
             tabPageLedTest.Name = "tabPageLedTest";
-            tabPageLedTest.Padding = new Padding(3, 3, 3, 3);
+            tabPageLedTest.Padding = new Padding(3);
             tabPageLedTest.Size = new Size(822, 943);
             tabPageLedTest.TabIndex = 3;
             tabPageLedTest.Text = "LED Test";
-            tabPageLedTest.UseVisualStyleBackColor = true;
             // 
             // ledTestView
             // 
@@ -143,6 +143,7 @@
             // 
             // tabPageCommand
             // 
+            tabPageCommand.BackColor = SystemColors.Control;
             tabPageCommand.Controls.Add(outputCommandView);
             tabPageCommand.Location = new Point(4, 60);
             tabPageCommand.Margin = new Padding(4, 5, 4, 5);
@@ -151,10 +152,10 @@
             tabPageCommand.Size = new Size(822, 943);
             tabPageCommand.TabIndex = 1;
             tabPageCommand.Text = "Outputs Command";
-            tabPageCommand.UseVisualStyleBackColor = true;
             // 
             // outputCommandView
             // 
+            outputCommandView.BackColor = Color.Transparent;
             outputCommandView.Location = new Point(10, 5);
             outputCommandView.Margin = new Padding(6, 8, 6, 8);
             outputCommandView.Name = "outputCommandView";
@@ -163,6 +164,7 @@
             // 
             // tabPageInputConfig
             // 
+            tabPageInputConfig.BackColor = SystemColors.Control;
             tabPageInputConfig.Controls.Add(inputConfiigView);
             tabPageInputConfig.Location = new Point(4, 60);
             tabPageInputConfig.Margin = new Padding(4, 5, 4, 5);
@@ -171,11 +173,10 @@
             tabPageInputConfig.Size = new Size(822, 943);
             tabPageInputConfig.TabIndex = 2;
             tabPageInputConfig.Text = "Input Config";
-            tabPageInputConfig.UseVisualStyleBackColor = true;
             // 
             // inputConfiigView
             // 
-            inputConfiigView.Location = new Point(13, 12);
+            inputConfiigView.Location = new Point(10, 5);
             inputConfiigView.Margin = new Padding(6, 8, 6, 8);
             inputConfiigView.Name = "inputConfiigView";
             inputConfiigView.Size = new Size(799, 918);
@@ -183,6 +184,7 @@
             // 
             // tabPageStatus
             // 
+            tabPageStatus.BackColor = SystemColors.Control;
             tabPageStatus.Controls.Add(statusView);
             tabPageStatus.Location = new Point(4, 60);
             tabPageStatus.Margin = new Padding(4, 5, 4, 5);
@@ -191,14 +193,13 @@
             tabPageStatus.Size = new Size(822, 943);
             tabPageStatus.TabIndex = 0;
             tabPageStatus.Text = "Status";
-            tabPageStatus.UseVisualStyleBackColor = true;
             // 
             // statusView
             // 
             statusView.Location = new Point(17, 18);
             statusView.Margin = new Padding(1, 2, 1, 2);
             statusView.Name = "statusView";
-            statusView.Size = new Size(796, 800);
+            statusView.Size = new Size(796, 918);
             statusView.TabIndex = 0;
             // 
             // MainForm
