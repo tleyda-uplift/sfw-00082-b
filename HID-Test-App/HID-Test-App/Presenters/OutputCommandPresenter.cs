@@ -17,6 +17,7 @@ namespace HID_Test_App.Presenters
             _hidService = hidService;
 
             _outputCommandView.SendEnabled = false;
+            _outputCommandView.SentLabelVisible = false;
             _outputCommandView.OutputPort = 0;
             ResetInputs();
 
@@ -31,6 +32,7 @@ namespace HID_Test_App.Presenters
         {
             _outputCommandView.StopSendTimer();
             _outputCommandView.SendEnabled = _hidService.Connected;
+            _outputCommandView.SentLabelVisible = false;
         }
 
         private void HidService_ConnectionChanged(object? sender, bool e)
@@ -75,6 +77,7 @@ namespace HID_Test_App.Presenters
         private void OutputCommandView_SendClicked(object? sender, EventArgs e)
         {
             _outputCommandView.SendEnabled = false;
+            _outputCommandView.SentLabelVisible = true;
             _outputCommandView.StartSendTimer();
             byte[] usbData = outputCommandBuilder
                 .WithPort(_outputCommandView.OutputPort)

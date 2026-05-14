@@ -114,6 +114,8 @@ namespace HID_Test_App.Views
         public string CommandData { get => textBoxCommandData.Text; set => textBoxCommandData.Text = value; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool SendEnabled { set => btnSend.Enabled = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool SentLabelVisible { get => labelSent.Visible; set => labelSent.Visible = value; }
 
         public event EventHandler? SendClicked;
         public event EventHandler? PortChanged;

@@ -80,6 +80,7 @@
             textBoxCommandData = new TextBox();
             comboBoxPort = new ComboBox();
             groupBox9 = new GroupBox();
+            labelSent = new Label();
             groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericDutyCycle7).BeginInit();
             groupBox7.SuspendLayout();
@@ -711,11 +712,25 @@
             groupBox9.TabStop = false;
             groupBox9.Text = "Output Command Message Data";
             // 
+            // labelSent
+            // 
+            labelSent.AutoSize = true;
+            labelSent.BackColor = Color.Transparent;
+            labelSent.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            labelSent.ForeColor = SystemColors.Highlight;
+            labelSent.Location = new Point(615, 113);
+            labelSent.Name = "labelSent";
+            labelSent.Size = new Size(155, 28);
+            labelSent.TabIndex = 63;
+            labelSent.Text = "Command Sent";
+            labelSent.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // OutputCommandView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
+            Controls.Add(labelSent);
             Controls.Add(groupBox9);
             Controls.Add(groupBox8);
             Controls.Add(groupBox7);
@@ -757,6 +772,7 @@
             groupBox9.ResumeLayout(false);
             groupBox9.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -813,5 +829,6 @@
         private TextBox textBoxCommandData;
         private ComboBox comboBoxPort;
         private GroupBox groupBox9;
+        private Label labelSent;
     }
 }

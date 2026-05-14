@@ -49,6 +49,7 @@ namespace HID_Test_App.Views
         decimal OutputDutyCycle6 { get; set; }
         decimal OutputDutyCycle7 { get; set; }
         bool SendEnabled { set; }
+        bool SentLabelVisible { get; set; }
 
         event EventHandler SendClicked;
         event EventHandler PortChanged;
