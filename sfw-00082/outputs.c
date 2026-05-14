@@ -22,6 +22,7 @@ typedef enum {
 static volatile unsigned int* outputCaptureRegisters[24];
 static volatile unsigned char* outputRegisters[24];
 
+// Initializes output logical parameters
 void initializeOutputParams() {
     outputRegisters[0] = &P1OUT;
     outputRegisters[1] = &P1OUT;
@@ -74,7 +75,9 @@ void initializeOutputParams() {
     outputCaptureRegisters[23] = 0;
 }
 
+// Initializes output functionality
 void initializeOutputs() {
+    // Setup GPIO pins
 #ifdef __MSP430_HAS_PORT1_R__
     GPIO_setOutputLowOnPin(GPIO_PORT_P1, GPIO_ALL);
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_ALL);
@@ -90,22 +93,26 @@ void initializeOutputs() {
     GPIO_setAsOutputPin(GPIO_PORT_P7, GPIO_ALL);
 #endif
 
+    // Set up each ports pins that will be used for outputs
     // Port 1
     P1OUT = 0;
     P1DIR = BIT7|BIT6|BIT5|BIT4|BIT3|BIT2|BIT1|BIT0;
     P1SEL = 0;
+    // set pins that have PWM capability
     P1SEL |= BIT5|BIT4|BIT3|BIT2;
 
     // Port 2
     P2OUT = 0;
     P2DIR = BIT7|BIT6|BIT5|BIT4|BIT3|BIT2|BIT1|BIT0;
     P2SEL = 0;
+    // set pins that have PWM capability
     P2SEL |= BIT5|BIT4|BIT1|BIT0;
 
     // Port 7
     P7OUT = 0;
     P7DIR = BIT7|BIT6|BIT5|BIT4|BIT3|BIT2|BIT1|BIT0;
     P7SEL = 0;
+    // set pins that have PWM capability
     P7SEL |= BIT6|BIT5|BIT4;
     
     // Configure TimerA0
@@ -149,6 +156,7 @@ void initializeOutputs() {
     initializeOutputParams();
 }
 
+// Determine output command state from received data
 OutputCommand getCommand(BYTE cmdData) {
     BYTE command = cmdData & (BIT6 | BIT5 | BIT4);
     if (command == BIT5) {
@@ -163,10 +171,12 @@ OutputCommand getCommand(BYTE cmdData) {
     return OutputNoOp;
 }
 
- BYTE getOutputBitmask(int index) {
-    return (BYTE)(0x01 << (index % 8));
- }
+// Calculate output pin bitmask from logical output index
+BYTE getOutputBitmask(int index) {
+   return (BYTE)(0x01 << (index % 8));
+}
 
+// Set state of output by logical index from received data
 void setOutput(int index, BYTE* cmdData) {
     bool changeEnabled = (cmdData[0] & BIT7) > 0;
 
@@ -175,21 +185,21 @@ void setOutput(int index, BYTE* cmdData) {
         switch(getCommand(cmdData[0])) // Function select
         {
             case OutputOff:
-                if (outputCaptureRegisters[index]) {
+                if (outputCaptureRegisters[index]) {    // Check if PWM capable output
                     *outputCaptureRegisters[index] = 0; // Off
                 } else {
                     *outputRegisters[index] &= ~getOutputBitmask(index);
                 }
                 break;
             case OutputOn:
-                if (outputCaptureRegisters[index]) {
+                if (outputCaptureRegisters[index]) {    // Check if PWM capable output
                     *outputCaptureRegisters[index] = PWM_MAX_COUNT; // Full
                 } else {
                     *outputRegisters[index] |= getOutputBitmask(index);
                 }
                 break;
             case OutputPWM:
-                if (outputCaptureRegisters[index]) {
+                if (outputCaptureRegisters[index]) {    // Check if PWM capable output
                     *outputCaptureRegisters[index] = cmdData[1]; // PWM, duty cycle per input
                 } else if (cmdData[1] > 0) {
                     // Output non PWM capable, non-zero duty cycle is fully on
@@ -205,6 +215,7 @@ void setOutput(int index, BYTE* cmdData) {
     }
 }
 
+// Set output states using original data format
 void setOutputsOriginalFormat(BYTE* cmdData) {
     //Byte 3,6,9,12,15,18,21,24,27 are Control packets.
     //7: statechg, 6-4: func, 3-0: reserved
@@ -230,10 +241,12 @@ void setOutputsOriginalFormat(BYTE* cmdData) {
     setOutput(22, cmdData + 27);
 }
 
+// Determine if received message is in original data format
 bool isOriginalMessageFormat(BYTE* cmdData) {
     return cmdData[1] == 0;
 }
 
+// Set output states using port-based data format
 void setOutputsPortFormat(BYTE* cmdData) {
     int startIndex = (cmdData[1] - 1) * 8;
 
@@ -247,6 +260,7 @@ void setOutputsPortFormat(BYTE* cmdData) {
     setOutput(startIndex++, cmdData + 24);
 }
 
+// Set output states using received data
 void setOutputs(BYTE* cmdData) {
     if(isOriginalMessageFormat(cmdData)) {
         setOutputsOriginalFormat(cmdData);
