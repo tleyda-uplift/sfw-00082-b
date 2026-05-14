@@ -44,7 +44,7 @@ namespace HID_Test_App.Presenters
             _hidService = hidService;
             _testCount = 9;
             _testState = TestState.Reset;
-            _hidConnected = true;
+            _hidConnected = false;
 
             _ledTestView.RunPauseClicked += LedTestView_StartClicked;
             _ledTestView.PrevClicked += LedTestView_PrevClicked;
