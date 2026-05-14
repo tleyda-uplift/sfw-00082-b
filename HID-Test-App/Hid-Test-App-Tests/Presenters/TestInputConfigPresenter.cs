@@ -17,6 +17,7 @@ namespace Hid_Test_App_Tests.Presenters
         int[] _inputResistor;
         bool _sendEnabled;
         string _rawData;
+        bool _sendTimerStarted;
 
         public TestView()
         {
@@ -25,7 +26,10 @@ namespace Hid_Test_App_Tests.Presenters
             _inputResistor = [.. Enumerable.Range(0, 8).Select(_ => 0)];
             _sendEnabled = false;
             _rawData = "";
+            _sendTimerStarted = false;
         }
+
+        public bool SendTimerStarted { get => _sendTimerStarted; }
 
         public int InputPort { get => _port; set => _port = value; }
         public bool InputEnable0 { get => _inputEnable[0]; set => _inputEnable[0] = value; }
@@ -58,6 +62,16 @@ namespace Hid_Test_App_Tests.Presenters
         public void ChangePort()
         {
             PortChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void StartSendTimer()
+        {
+            _sendTimerStarted = true;
+        }
+
+        public void StopSendTimer()
+        {
+            _sendTimerStarted = false;
         }
     }
 
@@ -182,6 +196,19 @@ namespace Hid_Test_App_Tests.Presenters
             var expectedText = string.Join(",", [.. usbData.Select(x => Convert.ToHexString([x]))]);
 
             _testView.ConfigData.Should().Be(expectedText);
+        }
+
+        [Fact]
+        public void InputConfigPresenter_TemporarilyDisablesSendButtonOnSend()
+        {
+            _hidService.Connect(0, 0);
+            _testView.ClickSend();
+
+            _testView.SendEnabled.Should().BeFalse();
+
+            _presenter.SendTimerExpired();
+
+            _testView.SendEnabled.Should().BeTrue();
         }
     }
 }

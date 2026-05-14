@@ -7,9 +7,19 @@ namespace HID_Test_App.Views
     public partial class InputConfiigView : UserControl, IInputConfigView
     {
         private InputConfigPresenter? _presenter;
+        private readonly System.Windows.Forms.Timer _timer;
+
         public InputConfiigView()
         {
             InitializeComponent();
+            _timer = new System.Windows.Forms.Timer();
+            _timer.Interval = 3000;
+            _timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            _presenter?.SendTimerExpired();
         }
 
         public void Initialize(IHidService hidService)
@@ -30,6 +40,16 @@ namespace HID_Test_App.Views
         private void InputConfiigView_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public void StartSendTimer()
+        {
+            _timer.Start();
+        }
+
+        public void StopSendTimer()
+        {
+            _timer.Stop();
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
