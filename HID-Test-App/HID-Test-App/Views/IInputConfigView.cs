@@ -24,6 +24,7 @@ namespace HID_Test_App.Views
         int PullResistor6 { get; set; }
         int PullResistor7 { get; set; }
 
+        bool SentLabelVisible { get; set; }
         bool SendEnabled { get; set; }
 
         string ConfigData { get; set; }

@@ -16,6 +16,7 @@ namespace HID_Test_App.Presenters
             _hidService = hidService;
 
             _inputConfigView.SendEnabled = false;
+            _inputConfigView.SentLabelVisible = false;
             _inputConfigView.InputPort = 0;
             ResetInputs();
 
@@ -28,6 +29,7 @@ namespace HID_Test_App.Presenters
         {
             _inputConfigView.StopSendTimer();
             _inputConfigView.SendEnabled = _hidService.Connected;
+            _inputConfigView.SentLabelVisible = false;
         }
 
         private void HidService_ConnectionChanged(object? sender, bool e)
@@ -64,6 +66,7 @@ namespace HID_Test_App.Presenters
         private void InputConfigView_SendClicked(object? sender, EventArgs e)
         {
             _inputConfigView.SendEnabled = false;
+            _inputConfigView.SentLabelVisible = true;
             _inputConfigView.StartSendTimer();
             var builder = new InputConfigBuilder();
             byte[] usbData = builder

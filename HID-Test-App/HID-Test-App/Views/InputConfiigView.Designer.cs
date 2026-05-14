@@ -56,6 +56,7 @@
             checkBoxInputEnable7 = new CheckBox();
             textBoxInputConfigRaw = new TextBox();
             groupBox9 = new GroupBox();
+            labelSent = new Label();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
@@ -380,10 +381,24 @@
             groupBox9.TabStop = false;
             groupBox9.Text = "Input Config Message Data";
             // 
+            // labelSent
+            // 
+            labelSent.AutoSize = true;
+            labelSent.BackColor = Color.Transparent;
+            labelSent.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            labelSent.ForeColor = SystemColors.Highlight;
+            labelSent.Location = new Point(615, 124);
+            labelSent.Name = "labelSent";
+            labelSent.Size = new Size(155, 28);
+            labelSent.TabIndex = 13;
+            labelSent.Text = "Command Sent";
+            labelSent.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // InputConfiigView
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(labelSent);
             Controls.Add(groupBox9);
             Controls.Add(groupBox8);
             Controls.Add(groupBox7);
@@ -417,6 +432,7 @@
             groupBox9.ResumeLayout(false);
             groupBox9.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -449,5 +465,6 @@
         private CheckBox checkBoxInputEnable7;
         private TextBox textBoxInputConfigRaw;
         private GroupBox groupBox9;
+        private Label labelSent;
     }
 }

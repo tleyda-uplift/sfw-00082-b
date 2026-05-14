@@ -90,6 +90,8 @@ namespace HID_Test_App.Views
         public bool SendEnabled { get => btnInputConfigSend.Enabled; set => btnInputConfigSend.Enabled = value; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ConfigData { get => textBoxInputConfigRaw.Text; set => textBoxInputConfigRaw.Text = value; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool SentLabelVisible { get => labelSent.Visible; set => labelSent.Visible = value; }
 
         public event EventHandler? SendClicked;
         public event EventHandler? PortChanged;

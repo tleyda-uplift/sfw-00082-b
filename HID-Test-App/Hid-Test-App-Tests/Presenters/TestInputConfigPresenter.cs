@@ -18,6 +18,7 @@ namespace Hid_Test_App_Tests.Presenters
         bool _sendEnabled;
         string _rawData;
         bool _sendTimerStarted;
+        bool _sentLabelVisible;
 
         public TestView()
         {
@@ -27,6 +28,7 @@ namespace Hid_Test_App_Tests.Presenters
             _sendEnabled = false;
             _rawData = "";
             _sendTimerStarted = false;
+            _sentLabelVisible = false;
         }
 
         public bool SendTimerStarted { get => _sendTimerStarted; }
@@ -50,6 +52,7 @@ namespace Hid_Test_App_Tests.Presenters
         public int PullResistor7 { get => _inputResistor[7]; set => _inputResistor[7] = value; }
         public bool SendEnabled { get => _sendEnabled; set => _sendEnabled = value; }
         public string ConfigData { get => _rawData; set => _rawData = value; }
+        public bool SentLabelVisible { get => _sentLabelVisible; set => _sentLabelVisible = value; }
 
         public event EventHandler? SendClicked;
         public event EventHandler? PortChanged;
@@ -204,11 +207,26 @@ namespace Hid_Test_App_Tests.Presenters
             _hidService.Connect(0, 0);
             _testView.ClickSend();
 
+            _testView.SendTimerStarted.Should().BeTrue();
             _testView.SendEnabled.Should().BeFalse();
 
             _presenter.SendTimerExpired();
 
             _testView.SendEnabled.Should().BeTrue();
+            _testView.SendTimerStarted.Should().BeFalse();
+        }
+
+        [Fact]
+        public void InputConfigPresenter_TemporarilyShowsNotificationOnSend()
+        {
+            _hidService.Connect(0, 0);
+            _testView.ClickSend();
+
+            _testView.SentLabelVisible.Should().BeTrue();
+
+            _presenter.SendTimerExpired();
+
+            _testView.SentLabelVisible.Should().BeFalse();
         }
     }
 }
