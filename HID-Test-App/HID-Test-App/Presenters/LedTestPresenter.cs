@@ -16,7 +16,6 @@ namespace HID_Test_App.Presenters
         private TestState _testState;
         private readonly ILedTestView _ledTestView;
         private readonly IHidService _hidService;
-        private System.Windows.Forms.Timer _testTimer;
         private int _testCount;
         private bool _hidConnected;
         private readonly string[] TestDisplay = 
@@ -45,7 +44,7 @@ namespace HID_Test_App.Presenters
             _hidService = hidService;
             _testCount = 9;
             _testState = TestState.Reset;
-            _hidConnected = false;
+            _hidConnected = true;
 
             _ledTestView.RunPauseClicked += LedTestView_StartClicked;
             _ledTestView.PrevClicked += LedTestView_PrevClicked;
@@ -55,10 +54,6 @@ namespace HID_Test_App.Presenters
             _ledTestView.StatusText = "N/A";
             SetLedColors();
             SetButtonStates();
-
-            _testTimer = new System.Windows.Forms.Timer();
-            _testTimer.Interval = 2000;
-            _testTimer.Tick += TimerHandler;
 
             _hidService.ConnectionChanged += HidService_ConnectionChanged;
         }
@@ -162,23 +157,23 @@ namespace HID_Test_App.Presenters
                 SetLedColors();
                 SetButtonStates();
                 SendCurrentCommand();
-                _testTimer.Start();
+                _ledTestView.StartTimer();
             }
             else if (_testState == TestState.Manual)
             {
                 _testState = TestState.Running;
                 SetButtonStates();
-                _testTimer.Start();
+                _ledTestView.StartTimer();
             }
             else
             {
-                _testTimer.Stop();
+                _ledTestView.StopTimer();
                 _testState = TestState.Manual;
                 SetButtonStates();
             }
         }
 
-        private void TimerHandler(object? sender, EventArgs e)
+        public void TimerHandler()
         {
             if (_testCount < 9)
             {
@@ -190,7 +185,7 @@ namespace HID_Test_App.Presenters
 
             if (_testCount >= 9) 
             {
-                _testTimer.Stop();
+                _ledTestView.StopTimer();
                 _testState = TestState.Reset;
                 SetButtonStates();
             }

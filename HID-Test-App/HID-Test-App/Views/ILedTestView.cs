@@ -20,5 +20,8 @@ namespace HID_Test_App.Views
         event EventHandler RunPauseClicked;
         event EventHandler NextClicked;
         event EventHandler ResetClicked;
+
+        void StartTimer();
+        void StopTimer();
     }
 }

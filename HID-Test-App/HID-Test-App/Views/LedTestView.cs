@@ -7,6 +7,7 @@ namespace HID_Test_App.Views
     public partial class LedTestView : UserControl, ILedTestView
     {
         private LedTestPresenter? presenter;
+        private System.Windows.Forms.Timer _testTimer;
 
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -31,6 +32,15 @@ namespace HID_Test_App.Views
         public LedTestView()
         {
             InitializeComponent();
+
+            _testTimer = new System.Windows.Forms.Timer();
+            _testTimer.Interval = 2000;
+            _testTimer.Tick += TestTimer_Tick;
+        }
+
+        private void TestTimer_Tick(object? sender, EventArgs e)
+        {
+            presenter?.TimerHandler();
         }
 
         public void Initialize(IHidService hidService)
@@ -61,6 +71,16 @@ namespace HID_Test_App.Views
         private void btnLedTestReset_Click(object sender, EventArgs e)
         {
             ResetClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void StartTimer()
+        {
+            _testTimer.Start();
+        }
+
+        public void StopTimer()
+        {
+            _testTimer.Stop();
         }
     }
 }
