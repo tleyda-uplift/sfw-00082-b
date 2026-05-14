@@ -52,5 +52,8 @@ namespace HID_Test_App.Views
 
         event EventHandler SendClicked;
         event EventHandler PortChanged;
+
+        void StartSendTimer();
+        void StopSendTimer();
     }
 }

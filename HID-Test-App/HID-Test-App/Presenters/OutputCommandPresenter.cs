@@ -10,11 +10,13 @@ namespace HID_Test_App.Presenters
         private readonly IOutputCommandView _outputCommandView;
         private readonly OutputCommandBuilder outputCommandBuilder;
         private readonly IHidService _hidService;
+        private bool _connected;
 
         public OutputCommandPresenter(IOutputCommandView outputCommandView, IHidService hidService)
         {
             _outputCommandView = outputCommandView;
             _hidService = hidService;
+            _connected = false;
 
             _outputCommandView.SendEnabled = false;
             _outputCommandView.OutputPort = 0;
@@ -27,9 +29,16 @@ namespace HID_Test_App.Presenters
             outputCommandBuilder = new OutputCommandBuilder();
         }
 
+        public void SendTimerExpired()
+        {
+            _outputCommandView.StopSendTimer();
+            _outputCommandView.SendEnabled = _connected;
+        }
+
         private void HidService_ConnectionChanged(object? sender, bool e)
         {
-            _outputCommandView.SendEnabled = e;
+            _connected = e;
+            _outputCommandView.SendEnabled = _connected;
         }
 
         private void OutputCommandView_PortChanged(object? sender, EventArgs e)
@@ -68,6 +77,8 @@ namespace HID_Test_App.Presenters
 
         private void OutputCommandView_SendClicked(object? sender, EventArgs e)
         {
+            _outputCommandView.SendEnabled = false;
+            _outputCommandView.StartSendTimer();
             byte[] usbData = outputCommandBuilder
                 .WithPort(_outputCommandView.OutputPort)
                 .WithOutput(0, _outputCommandView.ChangeEnabled0, GetOutputState(_outputCommandView.OutputOn0, _outputCommandView.OutputPwm0), (int)_outputCommandView.OutputDutyCycle0)

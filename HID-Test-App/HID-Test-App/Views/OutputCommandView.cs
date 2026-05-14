@@ -7,10 +7,19 @@ namespace HID_Test_App.Views
     public partial class OutputCommandView : UserControl, IOutputCommandView
     {
         private OutputCommandPresenter? _presenter;
+        private readonly System.Windows.Forms.Timer _timer;
 
         public OutputCommandView()
         {
             InitializeComponent();
+            _timer = new System.Windows.Forms.Timer();
+            _timer.Interval = 3000;
+            _timer.Tick += Timer_Tick;
+        }
+
+        private void Timer_Tick(object? sender, EventArgs e)
+        {
+            _presenter?.SendTimerExpired();
         }
 
         public void Initialize(IHidService hidService)
@@ -117,6 +126,16 @@ namespace HID_Test_App.Views
         private void comboBoxPort_SelectedIndexChanged(object sender, EventArgs e)
         {
             PortChanged?.Invoke(this, e);
+        }
+
+        public void StartSendTimer()
+        {
+            _timer.Start();
+        }
+
+        public void StopSendTimer()
+        {
+            _timer.Stop();
         }
     }
 }
