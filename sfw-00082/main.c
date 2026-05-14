@@ -112,14 +112,14 @@ VOID main (VOID)
     initClocks(8000000);   // Config clocks. MCLK=SMCLK=FLL=8MHz; ACLK=REFO=32kHz
     USB_setup(TRUE, TRUE); // Init USB & events; if a host is present, connect
 
-	initializeOutputs();
-    initializeInputs();
+	initializeOutputs();   // Initialize Outputs functionality
+    initializeInputs();    // Initialize Inputs functionality 
 
     resetReportBuffer();
 
     __enable_interrupt();  // Enable interrupts globally
 
-    OBDLED_OUT |= OBDLED_PIN;
+    OBDLED_OUT |= OBDLED_PIN; // Turn on Onboard Diagnostic LED
     
     while (1)
     {
@@ -145,23 +145,16 @@ VOID main (VOID)
                     USBHID_receiveReport((BYTE*)wholeString, HID0_INTFNUM);
 
                     if (wholeString[0] == 0x3F) {
-                        if(wholeString[2] == 0x37) // A correct Byte 0 indicates this data is good
+                        // Command/Configure Report
+                        if(wholeString[2] == 0x37)
                         {
+                            // Output command report
                             setOutputs((BYTE*)(wholeString + 2));
                         } else if (wholeString[2] == 0x38) {
+                            // Input configure report
                             configureInputs((BYTE*)(wholeString + 2));
+                            // Input configuration change, send inputs report
                             sendReportFlag = 1;
-                        }
-                    }
-                    else if (wholeString[0] == 0x40) {
-                        uint8_t idx;
-                        resetReportBuffer();
-                        getInputsReport(reportBuffer);
-
-                        for (idx = 0; idx < 10; ++idx) {
-                            if(USBHID_sendReport(reportBuffer, HID0_INTFNUM) == kUSBHID_sendComplete) {
-                                break;
-                            }
                         }
                     }
                     
@@ -172,11 +165,13 @@ VOID main (VOID)
                     bHIDDataReceived_event = FALSE;
                 }
                 if (sendReportFlag) {
+                    // Send inputs report
                     uint8_t idx;
                     resetReportBuffer();
                     getInputsReport(reportBuffer);
 
                     for (idx = 0; idx < 10; ++idx) {
+                        // Send report, retry 9 times if needed
                         if(USBHID_sendReport(reportBuffer, HID0_INTFNUM) == kUSBHID_sendComplete) {
                             sendReportFlag = false;
                             break;
