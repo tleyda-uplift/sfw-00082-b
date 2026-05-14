@@ -16,6 +16,7 @@ typedef struct {
 static InputState inputStates[24];
 
 static const uint8_t MAX_INPUT_DEBOUNCE_COUNT = 5;
+static uint8_t rtcDivider = 0;
 
 extern uint8_t sendReportFlag;
 
@@ -34,7 +35,7 @@ void initializeInputs(){
     RTC_A_initCounter(RTC_A_BASE,
                       RTC_A_CLOCKSELECT_ACLK,
                       RTC_A_COUNTERSIZE_8BIT);
-    RTC_A_setCounterValue(RTC_A_BASE, 1);
+    RTC_A_setCounterValue(RTC_A_BASE, 2);
     RTC_A_enableInterrupt(RTC_A_BASE,
                           RTC_A_TIME_EVENT_INTERRUPT);
     RTC_A_startClock(RTC_A_BASE);
@@ -146,9 +147,11 @@ __interrupt void RTC_A_ISR(void)
             // Toggle LED or set flag
             break;
         case 4:         // RTCCNTIFG (Counter interrupt)
-            // Handle timer interrupt
-            readInputs();
-            sendReportFlag = 1;
+            // Handle timer 
+            if ((++rtcDivider % 2) == 0) {
+                readInputs();
+                sendReportFlag = 1;
+            }
             break;
         default: break;
     }
