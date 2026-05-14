@@ -48,7 +48,7 @@ namespace HID_Test_App.Views
         decimal OutputDutyCycle5 { get; set; }
         decimal OutputDutyCycle6 { get; set; }
         decimal OutputDutyCycle7 { get; set; }
-        bool SendEnabled { set; }
+        bool SendEnabled { get; set; }
         bool SentLabelVisible { get; set; }
 
         event EventHandler SendClicked;

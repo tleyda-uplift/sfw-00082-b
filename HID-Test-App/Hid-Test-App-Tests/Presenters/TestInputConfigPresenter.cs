@@ -111,6 +111,7 @@ namespace Hid_Test_App_Tests.Presenters
             _testView.PullResistor6.Should().Be(0);
             _testView.PullResistor7.Should().Be(0);
             _testView.SendEnabled.Should().BeFalse();
+            _testView.SentLabelVisible.Should().BeFalse();
         }
 
         [Fact]
