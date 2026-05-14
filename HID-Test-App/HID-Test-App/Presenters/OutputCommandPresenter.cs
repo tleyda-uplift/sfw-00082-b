@@ -10,13 +10,11 @@ namespace HID_Test_App.Presenters
         private readonly IOutputCommandView _outputCommandView;
         private readonly OutputCommandBuilder outputCommandBuilder;
         private readonly IHidService _hidService;
-        private bool _connected;
 
         public OutputCommandPresenter(IOutputCommandView outputCommandView, IHidService hidService)
         {
             _outputCommandView = outputCommandView;
             _hidService = hidService;
-            _connected = false;
 
             _outputCommandView.SendEnabled = false;
             _outputCommandView.OutputPort = 0;
@@ -32,13 +30,12 @@ namespace HID_Test_App.Presenters
         public void SendTimerExpired()
         {
             _outputCommandView.StopSendTimer();
-            _outputCommandView.SendEnabled = _connected;
+            _outputCommandView.SendEnabled = _hidService.Connected;
         }
 
         private void HidService_ConnectionChanged(object? sender, bool e)
         {
-            _connected = e;
-            _outputCommandView.SendEnabled = _connected;
+            _outputCommandView.SendEnabled = e;
         }
 
         private void OutputCommandView_PortChanged(object? sender, EventArgs e)
