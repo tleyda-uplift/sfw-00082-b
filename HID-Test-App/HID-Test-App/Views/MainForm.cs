@@ -1,6 +1,7 @@
 using HID_Test_App.Presenters;
 using HID_Test_App.Services;
 using System.ComponentModel;
+using System.Reflection;
 
 namespace HID_Test_App.Views
 {
@@ -20,6 +21,10 @@ namespace HID_Test_App.Views
         public MainForm(IHidService hidService)
         {
             InitializeComponent();
+
+            var displayVersion = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+
+            Text = $"I/O Test App - {displayVersion}";
 
             _presenter = new MainPresenter(this, hidService);
 

@@ -1,12 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-	  <TargetFramework>net10.0-windows</TargetFramework>
+	<TargetFramework>net10.0-windows</TargetFramework>
     <RootNamespace>HID_Test_App</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+	<Version>0.0.1</Version>
+	<AssemblyVersion>0.0.1.0</AssemblyVersion>
+	<FileVersion>0.0.1.0</FileVersion>
+	<InformationalVersion>v0.0.1</InformationalVersion>
+	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <ItemGroup>
