@@ -1,9 +1,9 @@
 #ifndef OUTPUTS_H_
 #define OUTPUTS_H_
 
-#include "USB_API/USB_Common/types.h"               // Basic Type declarations
+#include <stdint.h>
 
-void initializeOutputs();
-void setOutputs(BYTE* cmdData);
+void initializeOutputs(void);
+void setOutputs(uint8_t *cmdData);
 
-#endif
+#endif /* OUTPUTS_H_ */

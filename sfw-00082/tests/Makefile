@@ -1,18 +1,20 @@
-CC      = gcc
-CFLAGS  = -Wall -Wextra -I.. -I.
-TARGET  = test_command_handler
+CC     = gcc
+CFLAGS = -Wall -Wextra -I.. -I.
 
-SRCS    = test_command_handler.c \
-          stubs.c \
-          ../command_handler.c \
-          unity/unity.c
+ALL_TESTS = test_command_handler test_outputs
 
-$(TARGET): $(SRCS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SRCS)
+all: $(ALL_TESTS)
+
+test_command_handler: test_command_handler.c stubs.c ../command_handler.c unity/unity.c
+	$(CC) $(CFLAGS) -o $@ $^
+
+test_outputs: test_outputs.c output_hal_stub.c ../outputs.c unity/unity.c
+	$(CC) $(CFLAGS) -o $@ $^
 
 .PHONY: test clean
-test: $(TARGET)
-	./$(TARGET)
+test: $(ALL_TESTS)
+	./test_command_handler
+	./test_outputs
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(ALL_TESTS)
