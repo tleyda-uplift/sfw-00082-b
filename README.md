@@ -35,6 +35,25 @@ Firmware for the **ELA-00572 GPIO controller** targeting BBS-00430/BBS-00431. Ru
 
 **Build environment:** Texas Instruments Code Composer Studio (Eclipse CDT). Open the `.project` file in `sfw-00082/` to import.
 
+#### Firmware Unit Tests
+
+Pure-logic modules are tested on the host using the [Unity](https://github.com/ThrowTheSwitch/Unity) C test framework. Hardware access is isolated behind HAL interfaces (`output_hal.h`, `input_hal.h`) that are stubbed in tests.
+
+**Requirements:** GCC (MSYS2 UCRT64 recommended on Windows), GNU Make.
+
+```bash
+cd sfw-00082/tests
+make test
+```
+
+**Test suites:**
+
+| Test file | Module under test | What is covered |
+|-----------|-------------------|-----------------|
+| `test_command_handler.c` | `command_handler.c` | USB report dispatch (output vs. input-config packet IDs, short-packet guard) |
+| `test_outputs.c` | `outputs.c` | Output function decoding (Off/On/PWM/NoOp), change-enable bit, PWM-capable vs. GPIO fallback, port-to-index mapping |
+| `test_inputs.c` | `inputs.c` | Config byte parsing, port-to-index mapping, debounce logic, input status report packing, RTC tick divider |
+
 ---
 
 ### 2. `HID-Test-App` — Windows Test Application
@@ -89,12 +108,16 @@ dotnet publish -r win-x64
 ```
 ├── sfw-00082/               # MSP430 firmware (C)
 │   ├── main.c               # Main loop and USB state machine
-│   ├── inputs.c             # GPIO input handling with debouncing
-│   ├── outputs.c            # PWM output and LED control
+│   ├── command_handler.c/h  # USB report dispatch
+│   ├── inputs.c/h           # GPIO input handling with debouncing
+│   ├── input_hal.c/h        # Input hardware abstraction layer
+│   ├── outputs.c/h          # PWM output and LED control
+│   ├── output_hal.c/h       # Output hardware abstraction layer
 │   ├── P8_LED_CONFIG.h      # Hardware pin configuration for three tri-color LEDs
 │   ├── USB_config/          # USB descriptor configuration
 │   ├── USB_app/             # USB HID application layer
-│   └── USB_API/             # TI USB stack
+│   ├── USB_API/             # TI USB stack
+│   └── tests/               # Host-side Unity unit tests
 │
 └── HID-Test-App/            # Windows test application (.NET/C#)
     ├── HID-Test-App/
