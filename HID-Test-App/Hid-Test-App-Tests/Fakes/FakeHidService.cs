@@ -39,6 +39,8 @@ namespace Hid_Test_App_Tests.Fakes
             ConnectionChanged?.Invoke(this, _connected);
         }
 
+        public byte[] StatusReportData { get; set; } = [];
+
         public byte[] GetReport(byte reportId)
         {
             return [];
@@ -46,7 +48,7 @@ namespace Hid_Test_App_Tests.Fakes
 
         public byte[] GetStatusReport()
         {
-            return [];
+            return StatusReportData;
         }
 
         public void Write(byte reportId, byte[] data)

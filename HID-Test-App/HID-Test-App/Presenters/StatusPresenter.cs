@@ -38,7 +38,7 @@ namespace HID_Test_App.Presenters
 
             _statusTimer = new System.Windows.Forms.Timer();
             _statusTimer.Interval = 750;
-            _statusTimer.Tick += TimerHandler;
+            _statusTimer.Tick += (s, e) => TimerHandler();
 
             _hidService.ConnectionChanged += HidService_ConnectionChanged;
         }
@@ -70,7 +70,7 @@ namespace HID_Test_App.Presenters
             HandleTimerState();
         }
 
-        private void TimerHandler(object? sender, EventArgs e)
+        public void TimerHandler()
         {
             try
             {
