@@ -67,6 +67,7 @@
 
 #include "inputs.h"
 #include "outputs.h"
+#include "command_handler.h"
 #include "P8_LED_CONFIG.h"
 #include "main.h"
 
@@ -144,19 +145,7 @@ VOID main (VOID)
                     // hidReceiveDataInBuffer((BYTE*)wholeString, MAX_STR_LENGTH, HID0_INTFNUM);
                     USBHID_receiveReport((BYTE*)wholeString, HID0_INTFNUM);
 
-                    if (wholeString[0] == 0x3F) {
-                        // Command/Configure Report
-                        if(wholeString[2] == 0x37)
-                        {
-                            // Output command report
-                            setOutputs((BYTE*)(wholeString + 2));
-                        } else if (wholeString[2] == 0x38) {
-                            // Input configure report
-                            configureInputs((BYTE*)(wholeString + 2));
-                            // Input configuration change, send inputs report
-                            sendReportFlag = 1;
-                        }
-                    }
+                    sendReportFlag |= processReport((BYTE*)wholeString, MAX_STR_LENGTH);
                     
                     // Reset buffers and flags
                     for (i = 0; i < MAX_STR_LENGTH; i++){
