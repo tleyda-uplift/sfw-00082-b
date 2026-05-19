@@ -6,3 +6,7 @@
 /Hid-Test-App-Tests/obj
 /HID-Test-App/.vs
 sfw-00082/.clangd
+sfw-00082/tests/test_command_handler
+sfw-00082/tests/test_command_handler.exe
+sfw-00082/tests/test_outputs
+sfw-00082/tests/test_outputs.exe
