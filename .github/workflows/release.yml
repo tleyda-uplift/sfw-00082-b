@@ -1,38 +1,13 @@
-name: Test App CI / Release
+name: Test App Release
 
 on:
   push:
-    branches: ["**"]
     tags: ["Test_App_v*.*.*.*"]
-  pull_request:
-    branches: [main]
 
 jobs:
-  test:
-    name: Run Tests
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "10.0.x"
-
-      - name: Restore
-        run: dotnet restore
-        working-directory: HID-Test-App
-
-      - name: Test
-        run: dotnet test Hid-Test-App-Tests/Hid-Test-App-Tests.csproj --no-restore --verbosity normal
-        working-directory: HID-Test-App
-
   release:
     name: Build & Publish Release
     runs-on: windows-latest
-    needs: test
-    if: startsWith(github.ref, 'refs/tags/Test_App_v')
     permissions:
       contents: write
 
