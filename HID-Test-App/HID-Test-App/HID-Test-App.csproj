@@ -17,6 +17,8 @@
 	<SelfContained>true</SelfContained>
 	<PublishSingleFile>true</PublishSingleFile>
 	<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+	<DebugType>none</DebugType>
+	<DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
