@@ -24,3 +24,14 @@ jobs:
       - name: Test
         run: dotnet test Hid-Test-App-Tests/Hid-Test-App-Tests.csproj --no-restore --verbosity normal
         working-directory: HID-Test-App
+
+  firmware-test:
+    name: Run Firmware Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build & run tests
+        run: make test
+        working-directory: sfw-00082/tests
