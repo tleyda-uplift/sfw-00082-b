@@ -28,7 +28,7 @@ Firmware for the **ELA-00572 GPIO controller** targeting BBS-00430/BBS-00431. Ru
 
 **HID report protocol:**
 | Report ID | Packet ID | Direction | Purpose |
-|-----------|-----------|---------|
+|-----------|-----------|-----------|---------|
 | `0x3F` | `0x37` | Host → Device | output control |
 | `0x3F` | `0x38` | Host → Device | Input configuration |
 | `0x40` |  N/A   | Device → Host | Input status |
