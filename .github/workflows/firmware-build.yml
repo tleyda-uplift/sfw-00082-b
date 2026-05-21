@@ -20,11 +20,11 @@ jobs:
       - name: Install MSP430-GCC compiler
         run: |
           mkdir -p ~/msp430-gcc
-          tar -xf gcc/toolchain/msp430-gcc-${{ env.MSP430_GCC_VERSION }}_linux64.tar.bz2 --strip-components=1 -C ~/msp430-gcc
+          tar -xf sfw-00082/gcc/toolchain/msp430-gcc-${{ env.MSP430_GCC_VERSION }}_linux64.tar.bz2 --strip-components=1 -C ~/msp430-gcc
 
       - name: Install MSP430-GCC support files
         run: |
-          unzip -q gcc/toolchain/msp430-gcc-support-files-${{ env.MSP430_SUPPORT_VERSION }}.zip -d ~
+          unzip -q sfw-00082/gcc/toolchain/msp430-gcc-support-files-${{ env.MSP430_SUPPORT_VERSION }}.zip -d ~
 
       - name: Add toolchain to PATH
         run: echo "$HOME/msp430-gcc/bin" >> $GITHUB_PATH
