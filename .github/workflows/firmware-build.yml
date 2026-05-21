@@ -3,6 +3,7 @@ name: Firmware Build
 on:
   push:
     tags: ["FW_v*.*.*"]
+  workflow_dispatch:
 
 env:
   MSP430_GCC_VERSION: 9.3.1.11
