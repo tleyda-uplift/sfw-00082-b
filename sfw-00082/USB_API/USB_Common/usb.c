@@ -279,6 +279,38 @@ extern __no_init BYTE pbYBufferAddressEp5[EP_MAX_PACKET_SIZE];
 extern __no_init BYTE pbXBufferAddressEp85[EP_MAX_PACKET_SIZE];
 extern __no_init BYTE pbYBufferAddressEp85[EP_MAX_PACKET_SIZE];
 
+#elif defined(__GNUC__)
+/* GCC: define USB hardware-mapped buffers in named sections.
+ * Each section is placed at the required hardware address by usb_gcc_sections.ld.
+ * (NOLOAD) prevents the linker from trying to initialise these at startup —
+ * the USB controller owns these memory regions directly. */
+tDEVICE_REQUEST tSetupPacket                    __attribute__((section(".usb_setup"),  used));
+tEDB0           tEndPoint0DescriptorBlock        __attribute__((section(".usb_edb0"),   used));
+tEDB            tInputEndPointDescriptorBlock[7] __attribute__((section(".usb_iedb"),   used));
+tEDB            tOutputEndPointDescriptorBlock[7]__attribute__((section(".usb_oedb"),   used));
+BYTE            abIEP0Buffer[EP0_MAX_PACKET_SIZE]__attribute__((section(".usb_iep0"),   used));
+BYTE            abOEP0Buffer[EP0_MAX_PACKET_SIZE]__attribute__((section(".usb_oep0"),   used));
+BYTE pbXBufferAddressEp1 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep1ox"),  used));
+BYTE pbYBufferAddressEp1 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep1oy"),  used));
+BYTE pbXBufferAddressEp81[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep1ix"),  used));
+BYTE pbYBufferAddressEp81[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep1iy"),  used));
+BYTE pbXBufferAddressEp2 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep2ox"),  used));
+BYTE pbYBufferAddressEp2 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep2oy"),  used));
+BYTE pbXBufferAddressEp82[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep2ix"),  used));
+BYTE pbYBufferAddressEp82[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep2iy"),  used));
+BYTE pbXBufferAddressEp3 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep3ox"),  used));
+BYTE pbYBufferAddressEp3 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep3oy"),  used));
+BYTE pbXBufferAddressEp83[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep3ix"),  used));
+BYTE pbYBufferAddressEp83[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep3iy"),  used));
+BYTE pbXBufferAddressEp4 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep4ox"),  used));
+BYTE pbYBufferAddressEp4 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep4oy"),  used));
+BYTE pbXBufferAddressEp84[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep4ix"),  used));
+BYTE pbYBufferAddressEp84[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep4iy"),  used));
+BYTE pbXBufferAddressEp5 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep5ox"),  used));
+BYTE pbYBufferAddressEp5 [EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep5oy"),  used));
+BYTE pbXBufferAddressEp85[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep5ix"),  used));
+BYTE pbYBufferAddressEp85[EP_MAX_PACKET_SIZE]   __attribute__((section(".usb_ep5iy"),  used));
+
 #endif
 
 VOID CdcResetData ();

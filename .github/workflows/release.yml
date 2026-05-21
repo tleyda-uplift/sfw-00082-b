@@ -1,0 +1,44 @@
+name: Test App Release
+
+on:
+  push:
+    tags: ["Test_App_v*.*.*.*"]
+
+jobs:
+  release:
+    name: Build & Publish Release
+    runs-on: windows-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore
+        run: dotnet restore
+        working-directory: HID-Test-App
+
+      - name: Publish
+        run: >
+          dotnet publish HID-Test-App/HID-Test-App.csproj
+          -c Release
+          -r win-x64
+          --output "${{ github.workspace }}\publish"
+        working-directory: HID-Test-App
+
+      - name: Rename artifact
+        run: |
+          Rename-Item -Path "${{ github.workspace }}\publish\HID-Test-App.exe" `
+                      -NewName "HID-Test-App-${{ github.ref_name }}.exe"
+        shell: pwsh
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: publish/HID-Test-App-${{ github.ref_name }}.exe
+          generate_release_notes: true

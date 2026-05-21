@@ -233,8 +233,13 @@ void initClocks(DWORD mclkFreq)
 /*  
  * ======== UNMI_ISR ========
  */
+#ifdef __GNUC__
+__attribute__((interrupt(UNMI_VECTOR)))
+void UNMI_ISR(void)
+#else
 #pragma vector = UNMI_VECTOR
 __interrupt VOID UNMI_ISR (VOID)
+#endif
 {
     switch (__even_in_range(SYSUNIV, SYSUNIV_BUSIFG))
     {

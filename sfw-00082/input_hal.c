@@ -49,8 +49,13 @@ bool hal_readGpioPin(int index)
     return GPIO_getInputPinValue(gpioPort, pin) == GPIO_INPUT_PIN_HIGH;
 }
 
+#ifdef __GNUC__
+__attribute__((interrupt(RTC_VECTOR)))
+void RTC_A_ISR(void)
+#else
 #pragma vector=RTC_VECTOR
 __interrupt void RTC_A_ISR(void)
+#endif
 {
     switch (__even_in_range(RTCIV, 16))
     {
