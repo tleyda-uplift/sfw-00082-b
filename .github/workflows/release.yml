@@ -7,10 +7,8 @@ on:
 
 jobs:
   release:
-    name: Build & Publish Release
+    name: Build & Upload Artifact
     runs-on: windows-latest
-    permissions:
-      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -38,8 +36,8 @@ jobs:
                       -NewName "HID-Test-App-${{ github.ref_name }}.exe"
         shell: pwsh
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          files: publish/HID-Test-App-${{ github.ref_name }}.exe
-          generate_release_notes: true
+          name: HID-Test-App-${{ github.ref_name }}
+          path: publish/HID-Test-App-${{ github.ref_name }}.exe
