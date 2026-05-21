@@ -71,8 +71,13 @@ WORD USB_determineFreq(void);
 /*----------------------------------------------------------------------------+
 | General Subroutines                                                         |
 +----------------------------------------------------------------------------*/
+#ifdef __GNUC__
+__attribute__((interrupt(USB_UBM_VECTOR)))
+void iUsbInterruptHandler(void)
+#else
 #pragma vector=USB_UBM_VECTOR
 __interrupt VOID iUsbInterruptHandler(VOID)
+#endif
 {
     BYTE bWakeUp = FALSE;
     //Check if the setup interrupt is pending.
