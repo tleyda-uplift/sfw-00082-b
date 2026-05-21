@@ -3,6 +3,7 @@ name: Test App Release
 on:
   push:
     tags: ["Test_App_v*.*.*.*"]
+  workflow_dispatch:
 
 jobs:
   release:
