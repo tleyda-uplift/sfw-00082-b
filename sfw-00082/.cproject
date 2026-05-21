@@ -85,6 +85,7 @@
                     </folderInfo>
                     <sourceEntries>
                         <entry excluding="tests|gcc" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="gcc/New folder"/>
                         <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="gcc/gcc-build"/>
                     </sourceEntries>
                 </configuration>
@@ -176,6 +177,7 @@
                     </folderInfo>
                     <sourceEntries>
                         <entry excluding="tests|gcc" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="gcc/New folder"/>
                     </sourceEntries>
                 </configuration>
             </storageModule>

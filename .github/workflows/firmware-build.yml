@@ -17,32 +17,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache MSP430-GCC compiler
-        id: cache-gcc
-        uses: actions/cache@v4
-        with:
-          path: ~/msp430-gcc
-          key: msp430-gcc-${{ env.MSP430_GCC_VERSION }}
-
       - name: Install MSP430-GCC compiler
-        if: steps.cache-gcc.outputs.cache-hit != 'true'
         run: |
-          wget -q https://dr.ti.com/dl/software/MSP-Tools/MSP430GCC/msp430-gcc-${{ env.MSP430_GCC_VERSION }}_linux64.tar.bz2
           mkdir -p ~/msp430-gcc
-          tar -xf msp430-gcc-${{ env.MSP430_GCC_VERSION }}_linux64.tar.bz2 --strip-components=1 -C ~/msp430-gcc
-
-      - name: Cache MSP430-GCC support files
-        id: cache-support
-        uses: actions/cache@v4
-        with:
-          path: ~/msp430-gcc-support-files
-          key: msp430-gcc-support-files-${{ env.MSP430_SUPPORT_VERSION }}
+          tar -xf gcc/toolchain/msp430-gcc-${{ env.MSP430_GCC_VERSION }}_linux64.tar.bz2 --strip-components=1 -C ~/msp430-gcc
 
       - name: Install MSP430-GCC support files
-        if: steps.cache-support.outputs.cache-hit != 'true'
         run: |
-          wget -q https://dr.ti.com/dl/software/MSP-Tools/MSP430GCC/msp430-gcc-support-files-${{ env.MSP430_SUPPORT_VERSION }}.zip
-          unzip -q msp430-gcc-support-files-${{ env.MSP430_SUPPORT_VERSION }}.zip -d ~
+          unzip -q gcc/toolchain/msp430-gcc-support-files-${{ env.MSP430_SUPPORT_VERSION }}.zip -d ~
 
       - name: Add toolchain to PATH
         run: echo "$HOME/msp430-gcc/bin" >> $GITHUB_PATH
