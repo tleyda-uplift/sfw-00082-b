@@ -1,0 +1,40 @@
+trigger: none
+
+pr:
+  branches:
+    include:
+      - main
+
+jobs:
+  - job: TestApp
+    displayName: Run Tests
+    pool:
+      vmImage: windows-latest
+
+    steps:
+      - checkout: self
+
+      - task: UseDotNet@2
+        displayName: Setup .NET
+        inputs:
+          version: 10.0.x
+
+      - script: dotnet restore
+        displayName: Restore
+        workingDirectory: HID-Test-App
+
+      - script: dotnet test Hid-Test-App-Tests/Hid-Test-App-Tests.csproj --no-restore --verbosity normal
+        displayName: Test
+        workingDirectory: HID-Test-App
+
+  - job: FirmwareTest
+    displayName: Run Firmware Tests
+    pool:
+      vmImage: ubuntu-latest
+
+    steps:
+      - checkout: self
+
+      - script: make test
+        displayName: Build & run tests
+        workingDirectory: sfw-00082/tests
