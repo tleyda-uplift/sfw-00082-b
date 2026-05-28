@@ -1,6 +1,5 @@
 /************************************************************************
- *  SFW-00082: Firmware for ELA-00572 GPIO controller, P-8A specialized	*
- *  Author: Mike Steffen												*
+ *  FMW-00060: Firmware for ELA-00572 GPIO controller					*
  *  																	*
  *  Description: 														*
  *  Firmware for the ELA-00572 GPIO controller, specialized for			*
@@ -10,9 +9,7 @@
  *  USB HID interface.													*
  *  																	*
  *  main.h: Support definitions and function prototypes for main.c		*
- *																		*
- *  Revision History:													*
- *  A : 11/14/2013 MAS : Original release								*
+ *																		*								*
  ************************************************************************/
 
 #ifndef MAIN_H_

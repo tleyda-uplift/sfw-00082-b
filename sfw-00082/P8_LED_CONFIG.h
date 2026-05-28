@@ -1,6 +1,5 @@
 /************************************************************************
- *  SFW-00082: Firmware for ELA-00572 GPIO controller, P-8A specialized	*
- *  Author: Mike Steffen												*
+ *  FMW-00060: Firmware for ELA-00572 GPIO controller						*
  *  																	*
  *  Description: 														*
  *  Firmware for the ELA-00572 GPIO controller, specialized for			*
@@ -9,10 +8,7 @@
  *  LEDs and allows PC-based control of these LEDs from a generic		*
  *  USB HID interface.													*
  *  																	*
- *  P8_LED_CONFIG.h: Port configuration for P-8A indicator outputs		*
- *																		*
- *  Revision History:													*
- *  A : 11/14/2013 MAS : Original release								*
+ *  P8_LED_CONFIG.h: Port configuration for P-8A indicator outputs							*
  ************************************************************************/
 
 #ifndef P8_LED_CONFIG_H_

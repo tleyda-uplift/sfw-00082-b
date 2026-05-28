@@ -1,4 +1,4 @@
-# Makefile for sfw-00082 — MSP430F5529 firmware
+# Makefile for fmw-00060 — MSP430F5529 firmware
 # Toolchain: msp430-elf-gcc (TI MSP430-GCC, https://www.ti.com/tool/MSP430-GCC-OPENSOURCE)
 #
 # Requires two downloads from TI:
@@ -14,7 +14,7 @@
 # The CCS project files (.project / .cproject) are unaffected by this
 # Makefile and continue to work normally in Code Composer Studio.
 
-PROJECT  = sfw-00082
+PROJECT  = fmw-00060
 MCU      = msp430f5529
 BUILD    = gcc-build
 

@@ -1,6 +1,5 @@
 /************************************************************************
- *  SFW-00082: Firmware for ELA-00572 GPIO controller, P-8A specialized	*
- *  Author: Mike Steffen												*
+ *  FMW-00060: Firmware for ELA-00572 GPIO controller					*
  *  																	*
  *  Description: 														*
  *  Firmware for the ELA-00572 GPIO controller, specialized for			*
@@ -12,10 +11,7 @@
  *  Parts of this source are derived from Texas Instruments libraries.	*
  *  See following block for TI license details.							*
  *  																	*
- *  main.c: Main runtime code											*
- *																		*
- *  Revision History:													*
- *  A : 11/14/2013 MAS : Original release								*
+ *  main.c: Main runtime code							*
  ************************************************************************/
 
 /* --COPYRIGHT--,BSD
