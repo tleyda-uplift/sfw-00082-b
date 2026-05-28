@@ -13,7 +13,7 @@ namespace HID_Test_App.Views
         {
             InitializeComponent();
             _timer = new System.Windows.Forms.Timer();
-            _timer.Interval = 3000;
+            _timer.Interval = 1000;
             _timer.Tick += Timer_Tick;
         }
 
