@@ -5,6 +5,6 @@
 /Hid-Test-App-Tests/bin/Debug/net10.0-windows
 /Hid-Test-App-Tests/obj
 /HID-Test-App/.vs
-sfw-00082/.clangd
-sfw-00082/.settings
-sfw-00082/gcc/gcc-build
+fmw-00060/.clangd
+fmw-00060/.settings
+fmw-00060/gcc/gcc-build
